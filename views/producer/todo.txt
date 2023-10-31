@@ -1,0 +1,2 @@
+Implement producer being assigned events
+Implement songs in dj's playlist being deletable

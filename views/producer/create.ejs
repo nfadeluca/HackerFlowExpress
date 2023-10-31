@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/png" href="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-headphones-communication-kiranshastry-gradient-kiranshastry.png" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>
+      <%- title %>
+   </title>
+   <link rel="stylesheet" href="/css/producer.css">
+</head>
+
+<body>
+   <%- include('../partials/navbar.ejs') %>
+
+   <!-- Main content -->
+   <div class="home-wrapper" style="text-align: center; padding: 40px; justify-content: center; align-items: center;">
+      <div class="home-wrapper" style="padding: 40px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; align-items: center;">
+         <div class="active-page-wrapper">
+            <h3 style="text-align: left;">Producer: Song Selection & Time Slot Assignment</h3>
+            <form action="javascript:void(0)" method="post" style="width: 100">
+               <!-- Song Selection -->
+               <div class="song-selection"
+                  style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+                  <label for="song-search" style="margin-right: 10px;">Search for songs:</label>
+                  <div style="display: flex; align-items: center; width: 100%;">
+                     <input type="text" id="song-search" name="song-search" placeholder="Enter song name..."
+                        style="flex: 1;">
+                     <button type="submit" style="margin-left: 10px;">Search</button>
+                  </div>
+                  <ul id="song-list" style="width: 100%; max-height: 200px; overflow-y: auto; list-style-type: none; text-align: left;">
+                  </ul>
+               </div>
+
+               <div class="dj-time-slot"
+                  style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 20px; width: 100%;">
+                  <label for="dj-select" style="margin-right: 10px;">Select DJ:</label>
+                  <select id="dj-select" name="dj-select" style="margin-bottom: 10px; width: 100%;">
+                  </select>
+                  <label for="time-slot" style="margin-right: 10px;">Assign Time Slot:</label>
+                  <select id="time-slot" name="time-slot" style="width: 100%;"></select>
+               </div>
+               <button type="submit" style="margin-top: 20px;" onclick="console.log('assigned')">Assign Songs to DJ</button>
+               <div id="message" style="margin-top: 20px;"></div>
+            </form>
+         </div>
+      </div>
+   </div>
+   <script src="/js/producer/create.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link href="/css/group9.css" rel="stylesheet" type="text/css">
+        <link href="/css/listener.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="common-title">
+            <img class="logo" src="/assets/headphones.png" alt="headphones" style="width: 64px; height: 64px; padding-right: 10px;"/>
+            <h2>The HackerFlow Radio</h2>
+        </div>
+        <div class="navbar">
+            <button type="button"> <a href="/listener">Listener</a></button>
+                <button type="button"> <a href="/producer">Producer</a></button>
+                <button type="button"> <a href="/DJ">DJ</a></button>
+                <button type="button"> <a href="/">Home</a></button>
+        </div>
+        <div class="listener-body-wrapper">
+            <h1>Listener</h1>
+            <div class="listener-sub-body-wrapper">
+                <div class="listener-preference-body">
+                    <h2>Preferences</h2>
+                    <h3>Select your Genre:</h3>
+                    <div class="listener-genre">
+                        <!-- Alert an error if none selected -->                            
+                        <button type="button">Electronic</button>
+                        <button type="button">Lo-Fi</button>
+                        <button type="button">Ambient</button>
+                        <button type="button">Classical</button>
+                    </div>
+                    <h3> Select your DJ:</h3>
+                    <div class="listener-dj">
+                        <select id="DJ" name="DJ">
+                            <!-- Alert an error if none selected -->
+                            <option value="DJ 1">DJ 1</option>
+                            <option value="DJ 2">DJ 2</option>
+                            <option value="DJ 3">DJ 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="listener-song-body">
+                    <div class="listener-song-checkbox">
+                        <ul>
+                            <li>
+                                <label class="form-control">
+                                    <input type="checkbox" name="checkbox" />
+                                    Top 5
+                                </label>
+                            </li>
+                            <li>
+                                <label class="form-control">
+                                    <input type="checkbox" name="checkbox" />
+                                    Top 10
+                                </label> 
+                            </li>
+                        </ul>
+                        <h2>Upcoming Songs</h2>
+                    </div>
+                    <table>
+                        <tr style="background-color: gray">
+                            <th>DJ</th>
+                            <th>Songs</th>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;"/>
+                                DJ 1
+                            </td>
+                            <td>Song 1</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;"/>
+                                DJ 2
+                            </td>
+                            <td>Song 2</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;"/>
+                                DJ 3
+                            </td>
+                            <td>Song 3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;"/>
+                                DJ 4
+                            </td>
+                            <td>Song 4</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>Song 5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

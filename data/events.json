@@ -1,0 +1,28 @@
+[
+  {
+    "dj": "Luna",
+    "songs": [
+      "Technologic"
+    ],
+    "timeslot": "13:00 - 14:00",
+    "id": 1
+  },
+  {
+    "dj": "Nightwave",
+    "songs": [
+      "Symphony No. 40: I. Molto allegro"
+    ],
+    "timeslot": "09:00 - 10:00",
+    "id": 2
+  },
+  {
+    "dj": "One",
+    "songs": [
+      "Moonlit Whispers",
+      "Ecliptic Echoes",
+      "Whimsical Waves"
+    ],
+    "timeslot": "17:00 - 18:00",
+    "id": 3
+  }
+]

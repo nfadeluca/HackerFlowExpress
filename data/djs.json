@@ -1,0 +1,62 @@
+[
+  {
+    "djID": 1,
+    "name": "One",
+    "songs": [
+      1,
+      2,
+      4,
+      6
+    ]
+  },
+  {
+    "djID": 2,
+    "name": "Two",
+    "songs": []
+  },
+  {
+    "djID": 3,
+    "name": "Nightwave",
+    "songs": []
+  },
+  {
+    "djID": 4,
+    "name": "Thunder",
+    "songs": []
+  },
+  {
+    "djID": 5,
+    "name": "Luna",
+    "songs": []
+  },
+  {
+    "djID": 6,
+    "name": "Solar Flare",
+    "songs": []
+  },
+  {
+    "djID": 7,
+    "name": "Echo",
+    "songs": []
+  },
+  {
+    "djID": 8,
+    "name": "Quantum",
+    "songs": []
+  },
+  {
+    "djID": 9,
+    "name": "Nebula",
+    "songs": []
+  },
+  {
+    "djID": 10,
+    "name": "Aurora",
+    "songs": []
+  },
+  {
+    "djID": 11,
+    "name": "Vortex",
+    "songs": []
+  }
+]

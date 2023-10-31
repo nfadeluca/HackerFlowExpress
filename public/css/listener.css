@@ -1,0 +1,76 @@
+body {
+    padding: 50px;
+}
+
+.common-title {
+    display: flex;
+    justify-content: center;
+}
+
+.listener-body-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+}
+
+.listener-sub-body-wrapper {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    align-items: baseline;
+}
+
+.listener-preference-body, 
+.listener-song-body {
+    border: solid;
+    border-color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+.listener-preference-body {
+    height: 300px;
+}
+
+.listener-genre {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.listener-song-body {
+    margin-left: 50px;
+    /* height: 400px; */
+    width: 600px;
+}
+
+.listener-song-body h2 {
+    margin-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+td,
+th {
+    border: 1px solid white;
+    padding: 10px 20px;
+}
+
+.listener-song-checkbox {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+    width: 90%;
+}
+
+.form-control {
+    padding-right: 25px;
+}

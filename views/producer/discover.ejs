@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/png"
+      href="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-headphones-communication-kiranshastry-gradient-kiranshastry.png" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>
+      <%- title %>
+   </title>
+   <link rel="stylesheet" href="/css/producer.css">
+</head>
+
+<body>
+   <%- include('../partials/navbar.ejs') %>
+
+      <!-- Main content -->
+      <div class="home-wrapper" style="text-align: center; padding: 40px;">
+         <!-- Title Section -->
+         <div class="title">
+            <h2>Discover New Producers</h2>
+            <p>Connect, collaborate, and get inspired.</p>
+         </div>
+
+         <!-- Search Bar -->
+         <div style="margin-top: 20px;">
+            <input id="producerSearch" type="text" placeholder="Search Producers..." style="width: 70%; padding: 10px;">
+            <button type="button" onclick="filterProducers()">Search</button>
+         </div>
+
+         <!-- List of Producers (placeholders) -->
+         <ul id="producerList" style="list-style-type: none; padding: 0; margin-top: 30px;">
+            <% djs.forEach((dj, index)=> { %>
+               <li id="producer-<%= index %>"
+                  style="background-color: #000000; padding: 20px; margin-bottom: 20px; border-radius: 8px;">
+                  <strong><%- dj.name %></strong><br>
+                  <a href="#">View Profile</a> | <a href="#">Connect</a>
+               </li>
+               <% }); %>
+         </ul>
+
+         <script>
+            function filterProducers() {
+               const searchValue = document.getElementById("producerSearch").value.toLowerCase();
+               const producers = document.getElementById("producerList").getElementsByTagName("li");
+
+               for (let i = 0; i < producers.length; i++) {
+                  const producerName = producers[i].getElementsByTagName("strong")[0].textContent;
+                  if (producerName.toLowerCase().indexOf(searchValue) > -1) {
+                     producers[i].style.display = "";
+                  } else {
+                     producers[i].style.display = "none";
+                  }
+               }
+            }
+         </script>
+      </div>
+</body>
+
+</html>
