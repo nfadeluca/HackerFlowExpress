@@ -61,11 +61,6 @@ document.getElementById('add-song-to-dj').addEventListener('input', function (ev
     searchAndDisplaySongs(event, 'add-dj-song-list');
 });
 
-document.getElementById('theme-song-input').addEventListener('input', function (event) {
-    event.target.value = event.target.value.replace(/[^a-zA-Z]/g, '');
-    searchAndDisplaySongs(event, 'add-theme-song-list');
-});
-
 function searchAndDisplaySongs(event, elementID) {
     const searchTerm = event.target.value.toLowerCase();
     const matchedSongs = songs.filter(song => song.title.toLowerCase().includes(searchTerm));
