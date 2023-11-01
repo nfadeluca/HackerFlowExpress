@@ -44,15 +44,10 @@
       <div style="padding: 20px; margin-bottom: 20px;">
          <h3>Theme or Event Management</h3>
          <div style="padding: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: start; width: 100%;">
-               <div style="display: flex; align-items: center; width: 100%;">
-                  <input type="text" id="theme-song-input" placeholder="Enter song name..." style="flex: 1;">
-                  <button id="add-song-to-theme-btn" type="submit" style="margin-top: 20px;" onclick="console.log('added')">Add</button>
-               </div>
-               <ul id="add-theme-song-list"
-                  style="width: 100%; max-height: 100px; overflow-y: auto; list-style-type: none; text-align: left;">
-               </ul>
-            </div>
+            <div style="padding: 10px;">
+               <label for="event-select">Select Event:</label>
+               <select id="event-select"></select>
+           </div>           
          </div>
          <div style="padding: 10px;">
             <ul id="theme-songs-list"></ul>

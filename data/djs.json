@@ -7,56 +7,67 @@
       2,
       4,
       6
-    ]
+    ],
+    "events": []
   },
   {
     "djID": 2,
     "name": "Two",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 3,
     "name": "Nightwave",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 4,
     "name": "Thunder",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 5,
     "name": "Luna",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 6,
     "name": "Solar Flare",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 7,
     "name": "Echo",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 8,
     "name": "Quantum",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 9,
     "name": "Nebula",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 10,
     "name": "Aurora",
-    "songs": []
+    "songs": [],
+    "events": []
   },
   {
     "djID": 11,
     "name": "Vortex",
-    "songs": []
+    "songs": [],
+    "events": []
   }
 ]

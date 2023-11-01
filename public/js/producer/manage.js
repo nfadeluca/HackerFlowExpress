@@ -1,8 +1,9 @@
 // Mock data fetch
 let djs = [];
 let songs = [];
+let events = [];
 
-// Fetch DJs and Songs
+// Fetch DJs and Songs and Events
 fetch('/api/djs').then(response => response.json()).then(data => {
     djs = data;
     populateDJDropdown();
@@ -12,6 +13,11 @@ fetch('/api/songs').then(response => response.json()).then(data => {
     songs = data;
 });
 
+fetch('/api/events').then(response => response.json()).then(data => {
+    events = data;
+    populateEventDropdown();
+});
+
 function populateDJDropdown() {
     const djSelect = document.getElementById('dj-playlist-select');
     djs.forEach(dj => {
@@ -19,6 +25,16 @@ function populateDJDropdown() {
         option.value = dj.djID;
         option.innerText = dj.name;
         djSelect.appendChild(option);
+    });
+}
+
+function populateEventDropdown() {
+    const eventSelect = document.getElementById('event-select');
+    events.forEach(event => {
+        const option = document.createElement('option');
+        option.value = event.id;  // Assuming each event has a unique 'id' field
+        option.innerText = `${event.dj} (${event.timeslot})`;
+        eventSelect.appendChild(option);
     });
 }
 
