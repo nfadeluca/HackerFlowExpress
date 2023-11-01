@@ -4,17 +4,46 @@
     "name": "One",
     "songs": [
       1,
-      2,
       4,
-      6
+      16
     ],
-    "events": []
+    "events": [
+      {
+        "dj": "One",
+        "time": "09:00 - 10:00",
+        "songs": [
+          "Whimsical Waves"
+        ]
+      }
+    ]
   },
   {
     "djID": 2,
     "name": "Two",
-    "songs": [],
-    "events": []
+    "songs": [
+      14,
+      16,
+      17,
+      19,
+      20
+    ],
+    "events": [
+      {
+        "dj": "Two",
+        "time": "15:00 - 16:00",
+        "songs": [
+          "Desert Drift",
+          "Polar Pulse"
+        ]
+      },
+      {
+        "dj": "Two",
+        "time": "16:00 - 17:00",
+        "songs": [
+          "Whimsical Waves"
+        ]
+      }
+    ]
   },
   {
     "djID": 3,
@@ -31,7 +60,10 @@
   {
     "djID": 5,
     "name": "Luna",
-    "songs": [],
+    "songs": [
+      3,
+      4
+    ],
     "events": []
   },
   {
@@ -62,12 +94,23 @@
     "djID": 10,
     "name": "Aurora",
     "songs": [],
-    "events": []
+    "events": [
+      5
+    ]
   },
   {
     "djID": 11,
     "name": "Vortex",
     "songs": [],
-    "events": []
+    "events": [
+      {
+        "dj": "Vortex",
+        "time": "17:00 - 18:00",
+        "songs": [
+          "Hybrid Moments",
+          "The Carnival of the Animals: XIII, The Swan"
+        ]
+      }
+    ]
   }
 ]

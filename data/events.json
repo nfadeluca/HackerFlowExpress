@@ -24,5 +24,105 @@
     ],
     "timeslot": "17:00 - 18:00",
     "id": 3
+  },
+  {
+    "dj": "One",
+    "songs": [
+      "Fairy Fountain"
+    ],
+    "timeslot": "10:00 - 11:00",
+    "id": 4
+  },
+  {
+    "dj": "Aurora",
+    "songs": [
+      "Sunset Serenity"
+    ],
+    "timeslot": "17:00 - 18:00",
+    "id": 5
+  },
+  {
+    "dj": "Solar Flare",
+    "songs": [
+      "Starry Dreams"
+    ],
+    "timeslot": "11:00 - 12:00",
+    "id": 6
+  },
+  {
+    "dj": "Solar Flare",
+    "songs": [
+      "Starry Dreams"
+    ],
+    "timeslot": "11:00 - 12:00",
+    "id": 7
+  },
+  {
+    "dj": "Nebula",
+    "songs": [
+      "Little Niece And Her Happiness Mechanism"
+    ],
+    "timeslot": "13:00 - 14:00",
+    "id": 8
+  },
+  {
+    "dj": "Vortex",
+    "songs": [
+      "Starry Dreams",
+      "Sunset Serenity"
+    ],
+    "timeslot": "13:00 - 14:00",
+    "id": 9
+  },
+  {
+    "dj": "Vortex",
+    "songs": [
+      "The Carnival of the Animals: XIII, The Swan"
+    ],
+    "timeslot": "16:00 - 17:00",
+    "id": 10
+  },
+  {
+    "dj": "Vortex",
+    "songs": [
+      "Harder, Better, Faster, Stronger",
+      "Technologic"
+    ],
+    "timeslot": "16:00 - 17:00",
+    "id": 11
+  },
+  {
+    "dj": "Vortex",
+    "songs": [
+      "Hybrid Moments",
+      "The Carnival of the Animals: XIII, The Swan"
+    ],
+    "timeslot": "17:00 - 18:00",
+    "id": 12
+  },
+  {
+    "dj": "Two",
+    "songs": [
+      "Desert Drift",
+      "Polar Pulse"
+    ],
+    "timeslot": "15:00 - 16:00",
+    "id": 13
+  },
+  {
+    "dj": "Two",
+    "songs": [
+      "Whimsical Waves"
+    ],
+    "timeslot": "16:00 - 17:00",
+    "id": 14
+  },
+  {
+    "dj": "One",
+    "songs": [
+      "Whimsical Waves"
+    ],
+    "timeslot": "09:00 - 10:00",
+    "id": 15
   }
 ]

@@ -38,6 +38,45 @@ function populateEventDropdown() {
     });
 }
 
+function displayDJEvents(dj) {
+    const djEventsList = document.getElementById('dj-events-list');
+    djEventsList.innerHTML = '';  // Clear current list
+
+    if (!dj.events || dj.events.length === 0) {
+        const li = document.createElement('li');
+        li.innerText = 'No events scheduled';
+        djEventsList.appendChild(li);
+        return;
+    }
+
+    dj.events.forEach(event => {
+        const li = document.createElement('li');
+
+        const djName = document.createElement('p');
+        djName.innerText = `DJ: ${event.dj}`;
+        li.appendChild(djName);
+
+        const timeSlot = document.createElement('p');
+        timeSlot.innerText = `TIME: ${event.time}`;
+        li.appendChild(timeSlot);
+
+        const songList = document.createElement('p');
+        songList.innerText = `SONGS: ${event.songs.join(', ')}`;
+        li.appendChild(songList);
+
+        djEventsList.appendChild(li);
+    });
+}
+
+document.getElementById('dj-playlist-select').addEventListener('change', function() {
+    const selectedDJID = this.value;
+    const dj = djs.find(dj => dj.djID === parseInt(selectedDJID));
+    if (dj) {
+        displayDJSongs(dj);
+        displayDJEvents(dj);  // Added this line to display events
+    }
+});
+
 document.getElementById('add-song-btn').addEventListener('click', function () {
     const selectedSongs = document.querySelectorAll('#add-dj-song-list input[name="selected-songs"]:checked');
     const selectedDJID = document.getElementById('dj-playlist-select').value;
