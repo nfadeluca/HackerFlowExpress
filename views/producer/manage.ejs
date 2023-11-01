@@ -3,7 +3,8 @@
 
 <head>
    <meta charset="UTF-8">
-   <link rel="icon" type="image/png" href="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-headphones-communication-kiranshastry-gradient-kiranshastry.png" />
+   <link rel="icon" type="image/png"
+      href="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-headphones-communication-kiranshastry-gradient-kiranshastry.png" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>
       <%- title %>
@@ -14,47 +15,44 @@
 <body>
    <%- include('../partials/navbar.ejs') %>
 
-   <!-- Main content -->
-   <div style="max-width: 600px; margin: 40px auto 0; padding: 20px;">
-      <!-- Playlist Management Section -->
-      <div style="padding: 20px; margin-bottom: 20px;">
-         <h3>Playlist Management</h3>
-         <div style="padding: 10px;">
-            <label for="dj-playlist-select">Select DJ:</label>
-            <select id="dj-playlist-select"></select>
-         </div>
-         <div style="padding: 10px;">
-            <h4 style="margin-top: 0;">Songs in DJ's Playlist:</h4>
-            <ul id="dj-songs-list"></ul>
-         </div>
-         <div style="padding: 10px;">
-            <div style="display: flex; flex-direction: column; align-items: start; width: 100%;">
-               <div style="display: flex; align-items: center; width: 100%;">
-                  <input type="text" id="add-song-to-dj" placeholder="Enter song name..." style="flex: 1;">
-                  <button id="add-song-btn" type="submit" style="margin-top: 20px;" onclick="console.log('added')">Add</button>
+      <!-- Main content -->
+      <div style="max-width: 600px; margin: 40px auto 0; padding: 20px;">
+         <!-- Playlist Management Section -->
+         <div style="padding: 20px; margin-bottom: 20px;">
+            <h3>Playlist Management</h3>
+            <div style="padding: 10px;">
+               <label for="dj-playlist-select">Select DJ:</label>
+               <select id="dj-playlist-select"></select>
+            </div>
+            <div style="padding: 10px;">
+               <h4 style="margin-top: 0;">Songs in DJ's Playlist:</h4>
+               <ul id="dj-songs-list"></ul>
+            </div>
+            <div style="padding: 10px;">
+               <div style="display: flex; flex-direction: column; align-items: start; width: 100%;">
+                  <div style="display: flex; align-items: center; width: 100%;">
+                     <input type="text" id="add-song-to-dj" placeholder="Enter song name..." style="flex: 1;">
+                     <button id="add-song-btn" type="submit" style="margin-top: 20px;"
+                        onclick="console.log('added')">Add</button>
+                  </div>
+                  <ul id="add-dj-song-list"
+                     style="width: 100%; max-height: 100px; overflow-y: auto; list-style-type: none; text-align: left;">
+                  </ul>
                </div>
-               <ul id="add-dj-song-list"
-                  style="width: 100%; max-height: 100px; overflow-y: auto; list-style-type: none; text-align: left;">
-               </ul>
             </div>
          </div>
-      </div>
 
-      <!-- Theme or Event Management Section -->
-      <div style="padding: 20px; margin-bottom: 20px;">
-         <h3>Theme or Event Management</h3>
-         <div style="padding: 10px;">
+         <!-- Theme or Event Management Section -->
+         <div style="padding: 20px; margin-bottom: 20px;">
+            <h3>Theme or Event Management</h3>
             <div style="padding: 10px;">
                <label for="event-select">Select Event:</label>
                <select id="event-select"></select>
-           </div>           
+               <button id="add-event-to-dj-btn">Add Event to DJ</button>
+            </div>
          </div>
-         <div style="padding: 10px;">
-            <ul id="theme-songs-list"></ul>
-         </div>
-      </div>
 
-      <script src="/js/producer/manage.js"></script>
+         <script src="/js/producer/manage.js"></script>
 </body>
 
 </html>
