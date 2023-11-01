@@ -28,6 +28,20 @@ body {
    line-height: 1.1;
  }
 
+  .delete-song-btn {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    background-color: #f44336;  
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .delete-song-btn:hover {
+    background-color: #d32f2f;
+  }
+
  button {
    border-radius: 8px;
    border: 1px solid transparent;

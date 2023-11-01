@@ -105,10 +105,38 @@ function displayDJSongs(dj) {
         const song = songs.find(s => s.songID === songID);
         if (song) {
             const li = document.createElement('li');
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.className = 'delete-song-btn';
+            deleteButton.onclick = function() {
+                removeSongFromDJ(dj, song.songID);
+            };
             li.innerText = song.title;
+            li.appendChild(deleteButton);
             djSongsList.appendChild(li);
         }
     });
+}
+
+function removeSongFromDJ(dj, songID) {
+    const index = dj.songs.indexOf(songID);
+    if (index > -1) {
+        dj.songs.splice(index, 1);
+        displayDJSongs(dj);
+        updateDJOnServer(dj); // Update the DJ data on the server
+    }
+}
+
+function addEventToDJ() {
+    const selectedEventID = parseInt(document.getElementById('event-select').value);
+    const selectedDJID = parseInt(document.getElementById('dj-playlist-select').value);
+
+    const dj = djs.find(dj => dj.djID === selectedDJID);
+    if (dj && !dj.events.includes(selectedEventID)) {
+        dj.events.push(selectedEventID);
+        console.log(`Event ID ${selectedEventID} added to ${dj.name}'s event list.`);
+        updateDJOnServer(dj);  // Optionally update the DJ on the server side
+    }
 }
 
 // Listen for changes on the DJ dropdown
@@ -163,3 +191,6 @@ document.getElementById('add-song-btn').addEventListener('click', function () {
     }
 });
 
+document.getElementById('add-event-to-dj-btn').addEventListener('click', function() {
+    addEventToDJ();
+});
