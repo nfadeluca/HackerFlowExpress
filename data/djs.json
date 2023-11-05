@@ -3,7 +3,6 @@
     "djID": 1,
     "name": "One",
     "songs": [
-      1,
       16
     ],
     "events": [
@@ -57,22 +56,10 @@
     "djID": 4,
     "name": "Thunder",
     "songs": [
-      12
+      19, 
+      20
     ],
-    "events": [
-      {
-        "dj": "Thunder",
-        "time": "13:00 - 14:00",
-        "songs": [
-          "Starry Dreams"
-        ]
-      },
-      {
-        "dj": "Thunder",
-        "time": "12:00 - 13:00",
-        "songs": []
-      }
-    ]
+    "events": []
   },
   {
     "djID": 5,
