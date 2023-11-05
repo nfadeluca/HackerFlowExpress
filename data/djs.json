@@ -3,7 +3,6 @@
     "djID": 1,
     "name": "One",
     "songs": [
-      1,
       4,
       16
     ],
@@ -20,13 +19,7 @@
   {
     "djID": 2,
     "name": "Two",
-    "songs": [
-      14,
-      16,
-      17,
-      19,
-      20
-    ],
+    "songs": [],
     "events": [
       {
         "dj": "Two",
@@ -54,7 +47,10 @@
   {
     "djID": 4,
     "name": "Thunder",
-    "songs": [],
+    "songs": [
+      19, 
+      20
+    ],
     "events": []
   },
   {
