@@ -47,17 +47,18 @@
                         <button class="genre-button3" type="button">Ambient</button>
                         <button class="genre-button4" type="button">Classical</button>
                     </div>
+                
                     <!-- DJ -->  
                     <h3> Select your DJ:</h3>
                     <div class="listener-dj">
                         <select id="DJ" name="DJ">
-                            <!-- All by default -->
                             <option value="AllDJ">All DJ</option>
-                            <option value="DJ 1">DJ 1</option>
-                            <option value="DJ 2">DJ 2</option>
-                            <option value="DJ 3">DJ 3</option>
+                            <% djs.forEach((dj) => { %>
+                                <option value="<%= dj.name %>"><%= dj.name %></option>
+                            <% }); %>
                         </select>
                     </div>
+
                 </div>
 
                 <!----- DISPLAY SONGS (RIGHT BOX) ----->
@@ -92,7 +93,7 @@
                                 <% dj.songs.forEach((songID) => {
                                     const song = songs.find(s => s.songID === songID);
                                     if (song) { %>
-                                        <tr>
+                                        <tr class="dj-row dj-<%= dj.name %>">
                                             <td>
                                                 <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />
                                                 <%= dj.name %>
