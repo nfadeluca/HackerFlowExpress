@@ -27,22 +27,24 @@
         document.getElementById("listener-name").innerHTML = "Hello " + newUsername + "!";
     });
 
-function selectGenre() {
     const buttons = document.querySelectorAll("[class^='genre-button']");
-
+    const songsTable = document.getElementById("songs-table");
+    
     // Event Listener: change preference according to button color and index
     buttons.forEach(function(button, index) {
         button.addEventListener("click", function() {
             const preferences = JSON.parse(localStorage.getItem("preferences"));
-            //console.log(preferences);
+    
             // Turn off genre preference, button switches to black
             if (button.style.backgroundColor === "grey") {
                 button.style.backgroundColor = "#1a1a1a";
-                switch(index) {
+    
+                // Update the genre preference to false
+                switch (index) {
                     case 0:
                         preferences.genre.Electronic = false;
                         break;
-                    case 1: 
+                    case 1:
                         preferences.genre.LoFi = false;
                         break;
                     case 2:
@@ -55,13 +57,14 @@ function selectGenre() {
                         break;
                 }
             } else { // Turn on genre preference, button switches to grey
-                button.style.backgroundColor = "grey"
-                //console.log("A genre was selected");
-                switch(index) {
+                button.style.backgroundColor = "grey";
+    
+                // Update the genre preference to true
+                switch (index) {
                     case 0:
                         preferences.genre.Electronic = true;
                         break;
-                    case 1: 
+                    case 1:
                         preferences.genre.LoFi = true;
                         break;
                     case 2:
@@ -74,24 +77,23 @@ function selectGenre() {
                         break;
                 }
             }
+    
             localStorage.setItem("preferences", JSON.stringify(preferences));
             console.log("Selected Preferences: ", preferences.genre);
+
         });
     });
-}
+    
+const djSelect = document.getElementById("DJ");
+// Event Listener: change the DJ preference
+djSelect.addEventListener("change", function () {
+    const preferences = JSON.parse(localStorage.getItem("preferences"));
+    preferences.DJ = djSelect.value; // new property
 
-function selectDJ() {
-    const djSelect = document.getElementById("DJ");
-    // Event Listener: change the DJ preference
-    djSelect.addEventListener("change", function () {
-        const preferences = JSON.parse(localStorage.getItem("preferences"));
-        preferences.DJ = djSelect.value; // new property
-
-        localStorage.setItem("preferences", JSON.stringify(preferences));
-        console.log("Selected DJ: ", preferences.DJ);
-        console.log(preferences);
-    });
-}
+    localStorage.setItem("preferences", JSON.stringify(preferences));
+    console.log("Selected DJ: ", preferences.DJ);
+    console.log(preferences);
+});
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -129,30 +131,19 @@ function filterTable() {
     }
 }
 
+//const songsTable = document.getElementById("songs-table");
+const djSelector = document.getElementById("DJ");
 
-function renderTable(preferences) {
-    const songs = loadSongsFromJson(); // Load songs from JSON file
-    const filteredSongs = filterSongsByGenre(songs, preferences);
-    const table = document.getElementById('songs-table'); // Assuming you have an id on your table
+djSelector.addEventListener("change", function () {
+    const selectedDJ = djSelector.value;
+    const djRows = document.querySelectorAll(".dj-row");
 
-    // Clear the existing table rows
-    while (table.rows.length > 1) {
-        table.deleteRow(1);
-    }
-
-    // Add rows for filtered songs
-    filteredSongs.forEach(song => {
-        const row = table.insertRow();
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        // Customize your table cell content here, e.g., cell1.innerHTML = song.artist;
-        // cell2.innerHTML = song.title;
+    djRows.forEach((row) => {
+        const djName = row.classList[1].substring(3); 
+        if (selectedDJ === "AllDJ" || selectedDJ === djName) {
+            row.style.display = "table-row";
+        } else {
+            row.style.display = "none";
+        }
     });
-}
-
-
-
-
-
-selectGenre();
-selectDJ();
+});
