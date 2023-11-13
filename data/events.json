@@ -124,5 +124,29 @@
     ],
     "timeslot": "09:00 - 10:00",
     "id": 15
+  },
+  {
+    "dj": "Thunder",
+    "songs": [
+      "Starry Dreams"
+    ],
+    "timeslot": "13:00 - 14:00",
+    "id": 16
+  },
+  {
+    "dj": "Luna",
+    "songs": [
+      "Polar Pulse"
+    ],
+    "timeslot": "17:00 - 18:00",
+    "id": 17
+  },
+  {
+    "dj": "Two",
+    "songs": [
+      "Whimsical Waves"
+    ],
+    "timeslot": "15:00 - 16:00",
+    "id": 18
   }
 ]

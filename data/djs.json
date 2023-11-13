@@ -4,7 +4,6 @@
     "name": "One",
     "songs": [
       1,
-      4,
       16
     ],
     "events": [
@@ -21,11 +20,7 @@
     "djID": 2,
     "name": "Two",
     "songs": [
-      14,
-      16,
-      17,
-      19,
-      20
+      16
     ],
     "events": [
       {
@@ -42,6 +37,13 @@
         "songs": [
           "Whimsical Waves"
         ]
+      },
+      {
+        "dj": "Two",
+        "time": "15:00 - 16:00",
+        "songs": [
+          "Whimsical Waves"
+        ]
       }
     ]
   },
@@ -54,17 +56,44 @@
   {
     "djID": 4,
     "name": "Thunder",
-    "songs": [],
-    "events": []
+    "songs": [
+      12
+    ],
+    "events": [
+      {
+        "dj": "Thunder",
+        "time": "13:00 - 14:00",
+        "songs": [
+          "Starry Dreams"
+        ]
+      },
+      {
+        "dj": "Thunder",
+        "time": "12:00 - 13:00",
+        "songs": []
+      }
+    ]
   },
   {
     "djID": 5,
     "name": "Luna",
     "songs": [
-      3,
-      4
+      20
     ],
-    "events": []
+    "events": [
+      {
+        "dj": "Luna",
+        "time": "17:00 - 18:00",
+        "songs": [
+          "Polar Pulse"
+        ]
+      },
+      {
+        "dj": "Luna",
+        "time": "17:00 - 18:00",
+        "songs": []
+      }
+    ]
   },
   {
     "djID": 6,
