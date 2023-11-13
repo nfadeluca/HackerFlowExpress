@@ -3,16 +3,18 @@ let djs = [];
 let songs = [];
 let events = [];
 
-// Fetch DJs and Songs and Events
+// Fetch DJs from the server
 fetch('/api/djs').then(response => response.json()).then(data => {
     djs = data;
     populateDJDropdown();
 });
 
+// Fetch songs from the server
 fetch('/api/songs').then(response => response.json()).then(data => {
     songs = data;
 });
 
+// Fetch events from the server
 fetch('/api/events').then(response => response.json()).then(data => {
     events = data;
     populateEventDropdown();
@@ -32,7 +34,7 @@ function populateEventDropdown() {
     const eventSelect = document.getElementById('event-select');
     events.forEach(event => {
         const option = document.createElement('option');
-        option.value = event.id;  // Assuming each event has a unique 'id' field
+        option.value = event.id;
         option.innerText = `${event.dj} (${event.timeslot})`;
         eventSelect.appendChild(option);
     });
@@ -73,7 +75,7 @@ document.getElementById('dj-playlist-select').addEventListener('change', functio
     const dj = djs.find(dj => dj.djID === parseInt(selectedDJID));
     if (dj) {
         displayDJSongs(dj);
-        displayDJEvents(dj);  // Added this line to display events
+        displayDJEvents(dj);
     }
 });
 
@@ -83,15 +85,7 @@ document.getElementById('add-song-btn').addEventListener('click', function () {
     
     selectedSongs.forEach(input => {
         const songID = parseInt(input.value);
-        const song = songs.find(s => s.songID === songID);
-        
-        if (song) {
-            const dj = djs.find(dj => dj.djID === parseInt(selectedDJID));
-            if (dj && !dj.songs.includes(song.songID)) {
-                dj.songs.push(song.songID);
-                console.log(`${song.title} added to ${dj.name}'s playlist.`);
-            }
-        }
+        addSongToDJ(songID, selectedDJID);
     });
 });
 
@@ -148,7 +142,7 @@ function displayDJSongs(dj) {
             deleteButton.innerText = 'Delete';
             deleteButton.className = 'delete-song-btn';
             deleteButton.onclick = function() {
-                removeSongFromDJ(dj, song.songID);
+                deleteSongFromDJ(song.songID, dj.djID);
             };
             li.innerText = song.title;
             li.appendChild(deleteButton);
@@ -157,79 +151,40 @@ function displayDJSongs(dj) {
     });
 }
 
-function removeSongFromDJ(dj, songID) {
-    const index = dj.songs.indexOf(songID);
-    if (index > -1) {
-        dj.songs.splice(index, 1);
-        displayDJSongs(dj);
-        updateDJOnServer(dj); // Update the DJ data on the server
-    }
-}
-
-function addEventToDJ() {
-    const selectedEventID = parseInt(document.getElementById('event-select').value);
-    const selectedDJID = parseInt(document.getElementById('dj-playlist-select').value);
-
-    const dj = djs.find(dj => dj.djID === selectedDJID);
-    if (dj && !dj.events.includes(selectedEventID)) {
-        dj.events.push(selectedEventID);
-        console.log(`Event ID ${selectedEventID} added to ${dj.name}'s event list.`);
-        updateDJOnServer(dj);  // Optionally update the DJ on the server side
-    }
-}
-
-// Listen for changes on the DJ dropdown
-document.getElementById('dj-playlist-select').addEventListener('change', function() {
-    const selectedDJID = this.value;
-    const dj = djs.find(dj => dj.djID === parseInt(selectedDJID));
-    if (dj) {
-        displayDJSongs(dj);
-    }
-});
-
-function updateDJOnServer(dj) {
-    // Create a fetch request to update the DJ on the server
-    fetch('/api/djs', {  // Update this endpoint
+function addSongToDJ(songID, djID) {
+    fetch(`/api/djs/${djID}/addsong`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dj) // Send the updated DJ object to the server
+        body: JSON.stringify({ songID }),
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log('Successfully updated DJ on server.');
+            displayDJSongs(data.updatedDJ);
         } else {
-            console.error('Error updating DJ:', data.error);
+            console.error('Error adding song:', data.message);
         }
-    });
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-document.getElementById('add-song-btn').addEventListener('click', function () {
-    const selectedSongs = document.querySelectorAll('#add-dj-song-list input[name="selected-songs"]:checked');
-    const selectedDJID = document.getElementById('dj-playlist-select').value;
-    
-    selectedSongs.forEach(input => {
-        const songID = parseInt(input.value);
-        const song = songs.find(s => s.songID === songID);
-        
-        if (song) {
-            const dj = djs.find(dj => dj.djID === parseInt(selectedDJID));
-            if (dj && !dj.songs.includes(song.songID)) {
-                dj.songs.push(song.songID);
-                console.log(`${song.title} added to ${dj.name}'s playlist.`);
-            }
+function deleteSongFromDJ(songID, djID) {
+    fetch(`/api/djs/${djID}/deletesong`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ songID }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            displayDJSongs(data.updatedDJ);
+        } else {
+            console.error('Error deleting song:', data.message);
         }
-    });
-
-    const selectedDJ = djs.find(dj => dj.djID === parseInt(selectedDJID));
-    if (selectedDJ) {
-        displayDJSongs(selectedDJ);
-        updateDJOnServer(selectedDJ); // Update the DJ data on the server
-    }
-});
-
-document.getElementById('add-event-to-dj-btn').addEventListener('click', function() {
-    addEventToDJ();
-});
+    })
+    .catch(error => console.error('Error:', error));
+}

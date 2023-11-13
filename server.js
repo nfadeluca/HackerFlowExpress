@@ -6,11 +6,14 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Routers
-const apiRouter = require('./routes/api');
 const indexRouter = require('./routes/index');
 const listenerRouter = require('./routes/listener');
 const producerRouter = require('./routes/producer');
 const djRouter = require('./routes/dj');
+
+const djRoutes = require('./routes/api/djs');
+const songRoutes = require('./routes/api/songs');
+const timeslotRoutes = require('./routes/api/timeslots');
 
 // Initialize express app
 const app = express();
@@ -31,11 +34,14 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Routes
-app.use('/', apiRouter);
 app.use('/', indexRouter);
 app.use('/', listenerRouter);
 app.use('/', producerRouter);
 app.use('/', djRouter);
+
+app.use('/api', djRoutes);
+app.use('/api', songRoutes);
+app.use('/api', timeslotRoutes);
 
 // Start the server
 const PORT = 3000;
