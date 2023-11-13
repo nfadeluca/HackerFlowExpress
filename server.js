@@ -18,8 +18,6 @@ const app = express();
 // Connect to MongoDB
 const password = process.env.MONGODB_PASSWORD;
 mongoose.connect(`mongodb+srv://hackerflowuser:${password}@cluster0.i0mb71s.mongodb.net/?retryWrites=true&w=majority`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
 })
 .then(() => console.log('Connected to MongoDB Atlas...'))
 .catch(err => console.error('Could not connect to MongoDB Atlas...', err));
