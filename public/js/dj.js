@@ -60,9 +60,9 @@ function displaySongs(selectedTime, elementID) {
     if (songList.childNodes.length == 0) {
         const tr = document.createElement('tr');
         const th = document.createElement('th');
-        const h3 = document.createElement('h3');
-        h3.innerText = 'No events scheduled for this time';
-        th.appendChild(h3);
+        const h4 = document.createElement('h4');
+        h4.innerText = 'No events scheduled for this time';
+        th.appendChild(h4);
         tr.appendChild(th);
         songList.appendChild(tr);
         return;
