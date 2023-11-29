@@ -23,39 +23,20 @@
                     </div>
                 </select>
             </div>
-            <div class="dj-song-body">
-                <table>
+            <div class="dj-song-body" style="padding: 20px;">
+                <table id="dj-songs-title">
                     <tr style="background-color: gray">
                         <th colspan="2" style="font-size: 20px;">Playlist</th>
                     </tr>
-                    <tr>
-                        <td> 
-                            1
-                        </td>
-                        <td>Segment 1</td>
-                    </tr>
-                    <tr>
-                        <td>
-                           2
-                        </td>
-                        <td>Segment 2</td>
-                    </tr>
-                    <tr>
-                        <td>
-                           3
-                        </td>
-                        <td>Segment 3</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            4
-                        </td>
-                        <td>Segment 4</td>
+                    <tr style="background-color: gray;">
+                        <th>DJ</th>
+                        <th>Songs</th>
                     </tr>
                 </table>
-                <br>
-                <button type="button"> <a href="/dj/search">Edit Playlist</a></button>
+                <table id="dj-songs">
+                </table>
             </div>
+            <button type="button"> <a href="/dj/search">Edit Playlist</a></button>
         </div>
         <script src="/js/dj.js"></script>
     </body>
