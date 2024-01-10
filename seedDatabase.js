@@ -17,20 +17,24 @@ mongoose.connect(`mongodb+srv://hackerflowuser:${password}@cluster0.i0mb71s.mong
 .catch(err => console.error('Could not connect to MongoDB Atlas...', err));
 
 const seedDB = async () => {
+   // Clear database
    await DJ.deleteMany({});
    await Song.deleteMany({});
    await Timeslot.deleteMany({});
 
+   // Import Songs data
    for (let song of Songs) {
       let newSong = new Song(song);
       await newSong.save();
    }
 
+   // Import DJs data
    for (let dj of DJs) {
       let newDJ = new DJ(dj);
       await newDJ.save();
    }
 
+   // Import Timeslots data
    for (let timeslot of Timeslots) {
       let newTimeslot = new Timeslot({ slot: timeslot });
       await newTimeslot.save();
@@ -38,6 +42,7 @@ const seedDB = async () => {
 };
 
 seedDB().then(() => {
+   console.log('Seeding complete...');
    mongoose.connection.close();
 });
  
