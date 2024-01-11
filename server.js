@@ -66,12 +66,16 @@ async function run() {
     try {
         await mongoClient.connect();
         const db = mongoClient.db();
-        const songs = db.collection('songs');
+        const changeStream = db.watch();
 
-        // Test query
-        const query = { songID: 1 };
-        const song = await songs.findOne(query);
-        console.log(song);
+        // Listen for changes in the database
+        changeStream.on('change', (change) => {
+            console.log('Change detected:', change);
+
+            // Emit an update event when a change occurs
+            io.emit('databaseUpdate');
+        });
+
     } catch {
         await mongoClient.close();
     }

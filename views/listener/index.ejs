@@ -116,8 +116,8 @@
         <!----- SCRIPTS ----->
         <script src="/js/login.js"></script>
         <script src="/js/listener.js"></script>
-        <!-- <script src="/socket.io/socket.io.js"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             // Connect to the Socket.io server
             const socket = io();
@@ -126,6 +126,7 @@
             socket.on('databaseUpdate', async () => {
                 // Reload data from the server when the update event is received
                 try {
+                    console.log("Client has detected a change! Attempting to update...");
                     const response1 = await axios.get('http://localhost:3000/api/djs');
                     const djs_data = response1.data;
                     const response2 = await axios.get('http://localhost:3000/api/songs');
@@ -140,36 +141,40 @@
                 }
             });
 
-            // Function to update the table with new data
             function updateTableData(djs_data, songs_data) {
-                // Clear the existing table content
                 const table = document.getElementById('songs-table');
                 table.innerHTML = '';
 
+                // Add header row with styles
+                table.innerHTML = `
+                    <tr style="background-color: gray;">
+                        <th style="width: 35%;">DJ</th>
+                        <th style="width: 65%;">Songs</th>
+                    </tr>
+                `;
+
                 // Iterate through DJs and songs to update the table
                 djs_data.forEach((dj) => {
-                    // Filter songs for the current DJ
                     const djSongs = songs_data.filter(song => dj.songs.includes(song.songID));
 
-                    // Add a row for each song
                     djSongs.forEach((song) => {
                         const row = table.insertRow();
 
-                        // Add DJ cell
-                        const djCell = row.insertCell(0);
-                        djCell.innerHTML = `<img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />${dj.name}`;
+                        row.innerHTML = `
+                            <td>
+                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />
+                                ${dj.name}
+                            </td>
+                            <td>${song.title}</td>
+                        `;
 
-                        // Add Song cell
-                        const songCell = row.insertCell(1);
-                        songCell.textContent = song.title;
-
-                        // Add class to the row for DJ styling
                         row.classList.add(`dj-row`, `dj-${dj.name}`);
                     });
                 });
 
                 console.log('Table updated with new data:', djs_data, songs_data);
             }
+
         </script>
     </body>
 </html>
