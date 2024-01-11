@@ -6,7 +6,7 @@
         "artist":"Daft Punk",
         "genre": {
             "electronic":true,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":false
             },
@@ -19,7 +19,7 @@
         "artist":"Daft Punk",
         "genre": {
             "electronic":true,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":false
             },
@@ -32,7 +32,7 @@
         "artist":"Pearl River Sound",
         "genre": {
             "electronic":true,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":false
             },
@@ -45,7 +45,7 @@
         "artist":"David Pajo",
         "genre": {
             "electronic":true,
-            "lo-fi":true,
+            "lofi":true,
             "ambient":false,
             "classical":false
             },
@@ -58,7 +58,7 @@
         "artist":"Legend of Zelda",
         "genre": {
             "electronic":true,
-            "lo-fi":true,
+            "lofi":true,
             "ambient":false,
             "classical":false
             },
@@ -71,7 +71,7 @@
         "artist":"Saint-Saens",
         "genre": {
             "electronic":false,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":true
             },
@@ -84,7 +84,7 @@
         "artist":"Mozart",
         "genre": {
             "electronic":false,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":true
             },
@@ -97,7 +97,7 @@
         "artist":"constantstill",
         "genre": {
             "electronic":true,
-            "lo-fi":true,
+            "lofi":true,
             "ambient":false,
             "classical":false
             },
@@ -110,7 +110,7 @@
         "artist":"DJ Cuddles",
         "genre": {
             "electronic":true,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":false,
             "classical":false
             },
@@ -123,7 +123,7 @@
         "artist":"Hiroshi Yoshimura",
         "genre": {
             "electronic":false,
-            "lo-fi":false,
+            "lofi":false,
             "ambient":true,
             "classical":false
             },
@@ -136,7 +136,7 @@
         "artist": "Celestial Vibes",
         "genre": {
             "electronic": true,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": false,
             "classical": false
         },
@@ -149,7 +149,7 @@
         "artist": "Lunar Melodies",
         "genre": {
             "electronic": false,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": true,
             "classical": false
         },
@@ -162,7 +162,7 @@
         "artist": "Horizon Beats",
         "genre": {
             "electronic": false,
-            "lo-fi": false,
+            "lofi": false,
             "ambient": true,
             "classical": true
         },
@@ -175,7 +175,7 @@
         "artist": "Morning Muse",
         "genre": {
             "electronic": true,
-            "lo-fi": false,
+            "lofi": false,
             "ambient": false,
             "classical": true
         },
@@ -188,7 +188,7 @@
         "artist": "Starship Rhythms",
         "genre": {
             "electronic": true,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": true,
             "classical": false
         },
@@ -201,7 +201,7 @@
         "artist": "Marine Melodies",
         "genre": {
             "electronic": false,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": true,
             "classical": false
         },
@@ -214,7 +214,7 @@
         "artist": "Green Grooves",
         "genre": {
             "electronic": false,
-            "lo-fi": false,
+            "lofi": false,
             "ambient": true,
             "classical": true
         },
@@ -227,7 +227,7 @@
         "artist": "Alpine Audio",
         "genre": {
             "electronic": true,
-            "lo-fi": false,
+            "lofi": false,
             "ambient": false,
             "classical": true
         },
@@ -240,7 +240,7 @@
         "artist": "Dune Dynamics",
         "genre": {
             "electronic": true,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": false,
             "classical": false
         },
@@ -253,7 +253,7 @@
         "artist": "Ice Insights",
         "genre": {
             "electronic": true,
-            "lo-fi": true,
+            "lofi": true,
             "ambient": true,
             "classical": false
         },

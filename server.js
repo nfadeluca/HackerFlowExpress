@@ -5,6 +5,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const http = require('http');
+const socketIO = require('socket.io');
+const { MongoClient } = require('mongodb'); 
+
 // Routers
 const indexRouter = require('./routes/index');
 const listenerRouter = require('./routes/listener');
@@ -17,6 +21,8 @@ const timeslotRoutes = require('./routes/api/timeslots');
 
 // Initialize express app
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
 // Connect to MongoDB
 const password = process.env.MONGODB_PASSWORD;
@@ -33,6 +39,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Serve the Socket.io client library
+app.get('/socket.io/socket.io.js', (req, res) => {
+    res.sendFile(path.join(__dirname, '/node_modules/socket.io-client/dist/socket.io.js'));
+});
+
 // Routes
 app.use('/', indexRouter);
 app.use('/', listenerRouter);
@@ -43,8 +54,45 @@ app.use('/api', djRoutes);
 app.use('/api', songRoutes);
 app.use('/api', timeslotRoutes);
 
+// Socket.io connection handling
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    // You can emit events or handle other socket-related functionality here
+});
+
+const mongoClient = new MongoClient(`mongodb+srv://hackerflowuser:${password}@cluster0.i0mb71s.mongodb.net/?retryWrites=true&w=majority`);
+
+mongoClient.connect((err) => {
+    console.log('Connecting to MongoDB');
+    if (err) {
+        console.error('Error connecting to MongoDB:', err);
+        process.exit(1);
+    }
+
+    console.log('Connected to MongoDB');
+
+    const db = mongoClient.db(); // use default database
+
+    // Set up MongoDB Change Stream on the entire database
+    const changeStream = db.watch();
+
+    // Listen for changes in the database
+    changeStream.on('change', (change) => {
+        console.log('Change detected:', change);
+
+        // Emit an update event when a change occurs
+        io.emit('databaseUpdate');
+    });
+});
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+    mongoClient.close();
+    process.exit();
+});
+
 // Start the server
 const PORT = 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

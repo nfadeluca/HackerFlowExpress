@@ -12,8 +12,9 @@ const songSchema = new mongoose.Schema({
   title: String,
   album: String,
   artist: String,
-  genre: genreSchema,
+  genre: genreSchema, // embededd document
   popularity: Number
 });
 
+// Compile schema into Song model
 module.exports = mongoose.model('Song', songSchema);
