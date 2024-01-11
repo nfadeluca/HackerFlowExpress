@@ -62,34 +62,22 @@ io.on('connection', (socket) => {
 
 const mongoClient = new MongoClient(`mongodb+srv://hackerflowuser:${password}@cluster0.i0mb71s.mongodb.net/?retryWrites=true&w=majority`);
 
-mongoClient.connect((err) => {
-    console.log('Connecting to MongoDB');
-    if (err) {
-        console.error('Error connecting to MongoDB:', err);
-        process.exit(1);
+async function run() {
+    try {
+        await mongoClient.connect();
+        const db = mongoClient.db();
+        const songs = db.collection('songs');
+
+        // Test query
+        const query = { songID: 1 };
+        const song = await songs.findOne(query);
+        console.log(song);
+    } catch {
+        await mongoClient.close();
     }
+}
 
-    console.log('Connected to MongoDB');
-
-    const db = mongoClient.db(); // use default database
-
-    // Set up MongoDB Change Stream on the entire database
-    const changeStream = db.watch();
-
-    // Listen for changes in the database
-    changeStream.on('change', (change) => {
-        console.log('Change detected:', change);
-
-        // Emit an update event when a change occurs
-        io.emit('databaseUpdate');
-    });
-});
-
-// Handle graceful shutdown
-process.on('SIGINT', () => {
-    mongoClient.close();
-    process.exit();
-});
+run().catch(console.dir);
 
 // Start the server
 const PORT = 3000;
