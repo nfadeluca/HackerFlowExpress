@@ -77,12 +77,56 @@
                         break;
                 }
             }
+
+            if (preferences.genre.Electronic || preferences.genre.LoFi || preferences.genre.Ambient || preferences.genre.Classical) {
+                filterByGenre(JSON.stringify(preferences.genre));
+            }
     
             localStorage.setItem("preferences", JSON.stringify(preferences));
             console.log("Selected Preferences: ", preferences.genre);
 
         });
     });
+
+    function filterByGenre(genres) {
+        //console.log(genres);
+        const table = document.getElementById("songs-table");
+        const tr = table.getElementsByTagName("tr");
+
+        fetch(`/api/songs/findByGenre`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: genres,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                //console.log("Data: ", data);
+                const songs = data.songs;
+                console.log("Songs: ", songs);
+                if (songs.length > 0) { 
+                    // filter the table by songs existing in data
+                    for (let i = 0; i < tr.length; i++) {
+                        const td = tr[i].getElementsByTagName("td")[1];
+                        if (td) {
+                            const txtValue = td.textContent || td.innerText;
+                            //console.log(txtValue.trim())
+                            const songExists = songs.some(song => song.title.toUpperCase() === txtValue.trim().toUpperCase());
+                            //console.log(songExists);
+                            tr[i].style.display = songExists ? "" : "none";
+                        }
+                    }
+                }
+            } else {
+                // Handle the error
+                console.error('Error:', data.message);
+            }
+        })
+            
+        
+    }
     
 const djSelect = document.getElementById("DJ");
 // Event Listener: change the DJ preference
@@ -105,13 +149,10 @@ function getCookie(name) {
 // Display searched songs
 function searchSong(song) {
     console.log("Searching a song '" + song + "'...")
-    filterTable();
-    // Get Preferences
-    // Call server API
-    // Display Table
+    filterBySearch();
 }
 
-function filterTable() {
+function filterBySearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("search-song");
     filter = input.value.toUpperCase();
@@ -147,3 +188,10 @@ djSelector.addEventListener("change", function () {
         }
     });
 });
+
+function clearSearch() {
+    document.getElementById("search-song"). value = "";
+    const errorMessage = document.getElementById("error-message");
+    errorMessage.textContent = "";
+    // clear table
+}
