@@ -11,6 +11,16 @@ body{
     padding: 25px;
     min-width: 320px;
     min-height: 100vh;
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+h4{
+    text-align: center;
 }
 
 .navbar {
@@ -47,10 +57,19 @@ table {
     width: 100%;
 }
 
+.table-section {
+    height: 250px;
+    overflow: auto;
+    width: 90%;
+    border: 1px solid #ccc;
+    margin: 20px;
+}
+
 td,
 th {
     border: 1px solid rgb(255, 255, 255);
-    padding: 10px 20px;
+    padding: 10px;
+    width: 20%;
 }
 
 td:nth-child(1) {
@@ -98,4 +117,13 @@ td:nth-child(1) {
 .dropdown-media select {
     background-color: #ffffff;
     width: 200px;
+}
+
+.form-control {
+    padding-right: 25px;
+}
+
+.change-name {
+    margin-bottom: 10px;
+    font-size: 12px;
 }
