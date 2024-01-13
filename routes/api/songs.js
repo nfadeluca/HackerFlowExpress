@@ -11,4 +11,25 @@ router.get('/songs', async (req, res) => {
     }
 });
 
+router.post('/songs/findByGenre', async (req, res) => {
+    try {
+        const genres = req.body;
+
+        const genreQuery = {};
+
+        Object.keys(genres).forEach(key => {
+            if (genres[key]) {
+                genreQuery[`genre.${key.toLowerCase()}`] = true;
+            }
+        });
+
+        const query = await song.find(genreQuery);
+        console.log(query);
+
+        res.json({ success: true, songs: query });
+    } catch(error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
 module.exports = router;
