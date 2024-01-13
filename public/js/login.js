@@ -5,13 +5,13 @@ Checks cookies and local storage. Reloads the page state if user is logged in. *
 window.onload = function() {
     const cookies = document.cookie.split("; ");
     const ls = localStorage.getItem("preferences");
-    console.log("(onload) Cookies: ", cookies);
-    console.log("(onload) Local Storage: ", ls);
+    console.log("(Window Onload) Cookies: ", cookies);
+    console.log("(Window Onload) Local Storage: ", ls);
     for (const cookie of cookies) {
         const [name, value] = cookie.split("=");
         if (name === "username") {
             const username = decodeURIComponent(value);
-            console.log("(onload) ", username +" already logged in");
+            console.log("(Window Onload) ", username +" already logged in");
 
             // Reload page state
             reloadListener(username);
@@ -68,17 +68,17 @@ function logout() {
 function welcomeListener(username) {
     const userPreferences = {
         "genre": {
-            "Electronic": false,
-            "LoFi": false,
-            "Ambient": false,
-            "Classical": false
+            "electronic": false,
+            "lofi": false,
+            "ambient": false,
+            "classical": false
         },
-        // "DJ": "" // Field set by user
+        "DJ": "AllDJ"
     }
     const userPreferencesJSON = JSON.stringify(userPreferences);
     // Initialize preferences in local storage
     localStorage.setItem("preferences", userPreferencesJSON);
-    console.log(localStorage.getItem("preferences"));
+    console.log("Current Preferences: ", localStorage.getItem("preferences"));
     // Display welcome user
     const text = "Hello " + username + "!";
     document.getElementById("listener-name")
@@ -86,6 +86,49 @@ function welcomeListener(username) {
 }
 
 function reloadListener(username) {
+    // Reload Username
     let text = "Hello " + username + "!";
     document.getElementById("listener-name").innerHTML = text;
+
+    // Reload Preferences
+    const preferences = JSON.parse(localStorage.getItem("preferences"));
+    console.log("Saved Preferences: ", preferences);
+
+    // Restore Genre Button colors
+    const buttons = document.querySelectorAll("[class^='genre-button']");
+    buttons.forEach( (button, index) => {
+        switch (index) {
+            case 0:
+                if(preferences.genre.electronic) {
+                    button.style.backgroundColor = "grey";
+                }
+                break;
+            case 1:
+                if(preferences.genre.lofi) {
+                    button.style.backgroundColor = "grey";
+                }
+                break;
+            case 2:
+                if(preferences.genre.ambient) {
+                    button.style.backgroundColor = "grey";
+                }
+                break;
+            case 3:
+                if(preferences.genre.classical) {
+                    button.style.backgroundColor = "grey";
+                }
+                break;
+            default:
+                break;
+        }
+    });
+
+    // Restore DJ Selection
+    const djSelector = document.getElementById("DJ");
+    for (let i = 0; i < djSelector.options.length; i++) {
+        if (djSelector.options[i].value === preferences.DJ) {
+            djSelector.selectedIndex = i;
+            break;
+        }
+    }
 }

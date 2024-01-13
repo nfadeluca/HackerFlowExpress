@@ -14,14 +14,6 @@ router.get('/songs', async (req, res) => {
 router.post('/songs/findByGenre', async (req, res) => {
     try {
         const genres = req.body;
-        //console.log("Genres:", genres);
-
-        // const query = await song.find({ 
-        //     "genre.electronic": genres.Electronic, 
-        //     "genre.lofi": genres.LoFi, 
-        //     "genre.ambient": genres.Ambient, 
-        //     "genre.classical": genres.Classical 
-        // });
 
         const genreQuery = {};
 

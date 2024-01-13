@@ -1,138 +1,37 @@
 // Search song form
-    function validateForm(event) {
-        event.preventDefault(); // prevent page refresh
-        const inputField = document.getElementById("search-song");
-        const errorMessage = document.getElementById("error-message");
-        if (inputField.value.trim() === "") {
-            errorMessage.textContent = "Please enter a song name.";
-            errorMessage.style.color = "red"; 
-            return false; // Prevent form submission
+function validateForm(event) {
+    event.preventDefault(); // prevent page refresh
+    const inputField = document.getElementById("search-song");
+    const errorMessage = document.getElementById("error-message");
+    if (inputField.value.trim() === "") {
+        errorMessage.textContent = "Please enter a song name.";
+        errorMessage.style.color = "red"; 
+        return false; // Prevent form submission
+    }
+    errorMessage.textContent = "";
+    searchSong(inputField.value);
+    return true; // Allow form submission
+}
+
+// Change username
+const element = document.querySelector(".change-name");
+element.addEventListener("click", function() {
+    let newUsername;
+    do {
+        newUsername = prompt("Please enter your new name:");
+        if (newUsername == null) {
+            return;
         }
-        errorMessage.textContent = "";
-        searchSong(inputField.value);
-        return true; // Allow form submission
-    }
+    } while (newUsername !== null && newUsername.trim() === "");
+    document.cookie = "username=" + newUsername + "; SameSite=Lax";
+    document.getElementById("listener-name").innerHTML = "Hello " + newUsername + "!";
+});
 
-    // Change username
-    const element = document.querySelector(".change-name");
-    element.addEventListener("click", function() {
-        let newUsername;
-        do {
-            newUsername = prompt("Please enter your new name:");
-            if (newUsername == null) {
-                return;
-            }
-        } while (newUsername !== null && newUsername.trim() === "");
-        document.cookie = "username=" + newUsername + "; SameSite=Lax";
-        document.getElementById("listener-name").innerHTML = "Hello " + newUsername + "!";
-    });
-
-    const buttons = document.querySelectorAll("[class^='genre-button']");
-    const songsTable = document.getElementById("songs-table");
-    
-    // Event Listener: change preference according to button color and index
-    buttons.forEach(function(button, index) {
-        button.addEventListener("click", function() {
-            const preferences = JSON.parse(localStorage.getItem("preferences"));
-    
-            // Turn off genre preference, button switches to black
-            if (button.style.backgroundColor === "grey") {
-                button.style.backgroundColor = "#1a1a1a";
-    
-                // Update the genre preference to false
-                switch (index) {
-                    case 0:
-                        preferences.genre.Electronic = false;
-                        break;
-                    case 1:
-                        preferences.genre.LoFi = false;
-                        break;
-                    case 2:
-                        preferences.genre.Ambient = false;
-                        break;
-                    case 3:
-                        preferences.genre.Classical = false;
-                        break;
-                    default:
-                        break;
-                }
-            } else { // Turn on genre preference, button switches to grey
-                button.style.backgroundColor = "grey";
-    
-                // Update the genre preference to true
-                switch (index) {
-                    case 0:
-                        preferences.genre.Electronic = true;
-                        break;
-                    case 1:
-                        preferences.genre.LoFi = true;
-                        break;
-                    case 2:
-                        preferences.genre.Ambient = true;
-                        break;
-                    case 3:
-                        preferences.genre.Classical = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if (preferences.genre.Electronic || preferences.genre.LoFi || preferences.genre.Ambient || preferences.genre.Classical) {
-                filterByGenre(JSON.stringify(preferences.genre));
-            }
-    
-            localStorage.setItem("preferences", JSON.stringify(preferences));
-            console.log("Selected Preferences: ", preferences.genre);
-
-        });
-    });
-
-    function filterByGenre(genres) {
-        //console.log(genres);
-        const table = document.getElementById("songs-table");
-        const tr = table.getElementsByTagName("tr");
-
-        fetch(`/api/songs/findByGenre`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: genres,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                //console.log("Data: ", data);
-                const songs = data.songs;
-                console.log("Songs: ", songs);
-                if (songs.length > 0) { 
-                    // filter the table by songs existing in data
-                    for (let i = 0; i < tr.length; i++) {
-                        const td = tr[i].getElementsByTagName("td")[1];
-                        if (td) {
-                            const txtValue = td.textContent || td.innerText;
-                            //console.log(txtValue.trim())
-                            const songExists = songs.some(song => song.title.toUpperCase() === txtValue.trim().toUpperCase());
-                            //console.log(songExists);
-                            tr[i].style.display = songExists ? "" : "none";
-                        }
-                    }
-                }
-            } else {
-                // Handle the error
-                console.error('Error:', data.message);
-            }
-        })
-            
-        
-    }
-    
-const djSelect = document.getElementById("DJ");
 // Event Listener: change the DJ preference
+const djSelect = document.getElementById("DJ");
 djSelect.addEventListener("change", function () {
     const preferences = JSON.parse(localStorage.getItem("preferences"));
-    preferences.DJ = djSelect.value; // new property
+    preferences.DJ = djSelect.value; 
 
     localStorage.setItem("preferences", JSON.stringify(preferences));
     console.log("Selected DJ: ", preferences.DJ);
@@ -172,9 +71,23 @@ function filterBySearch() {
     }
 }
 
-//const songsTable = document.getElementById("songs-table");
-const djSelector = document.getElementById("DJ");
+// Uses local dj/songs data to filter according to preferences stored in local storage
+function filterByGenre(djs, songs, genres) {
+    const table = document.getElementById("songs-table");
+    const tr = table.getElementsByTagName("tr");
 
+    if (songs.length > 0) {
+        const filteredSongs = songs.filter(song => {
+        // Check if at least one preference is true for the current song
+        return Object.keys(genres).some(genre => genres[genre] && song.genre[genre]);
+        });
+        //console.log("Filtered Songs: ", filteredSongs)
+        updateTableData(djs, filteredSongs);
+    } // else do nothing
+}
+
+// Event Listener: Filter by DJ
+const djSelector = document.getElementById("DJ");
 djSelector.addEventListener("change", function () {
     const selectedDJ = djSelector.value;
     const djRows = document.querySelectorAll(".dj-row");
@@ -189,9 +102,37 @@ djSelector.addEventListener("change", function () {
     });
 });
 
-function clearSearch() {
-    document.getElementById("search-song"). value = "";
-    const errorMessage = document.getElementById("error-message");
-    errorMessage.textContent = "";
-    // clear table
+function updateTableData(djs_data, songs_data) {
+    const table = document.getElementById('songs-table');
+    table.innerHTML = '';
+
+    // Add header row with styles
+    table.innerHTML = `
+        <tr style="background-color: gray;">
+            <th style="width: 35%;">DJ</th>
+            <th style="width: 65%;">Songs</th>
+        </tr>
+    `;
+
+    // Iterate through DJs and songs to update the table
+    djs_data.forEach((dj) => {
+        const djSongs = songs_data.filter(song => dj.songs.includes(song.songID));
+
+        djSongs.forEach((song) => {
+            const row = table.insertRow();
+
+            row.innerHTML = `
+                <td>
+                    <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />
+                    ${dj.name}
+                </td>
+                <td>${song.title}</td>
+            `;
+
+            row.classList.add(`dj-row`, `dj-${dj.name}`);
+        });
+    });
+
+    //console.log('Table updated with new data:', djs_data, songs_data);
 }
+
