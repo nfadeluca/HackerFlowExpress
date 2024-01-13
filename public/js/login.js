@@ -131,4 +131,7 @@ function reloadListener(username) {
             break;
         }
     }
+
+    // Restore Table
+    restoreSavedTableData(); // I can access functions but not variables???
 }

@@ -236,6 +236,16 @@
 
                 console.log("Cleared preferences: ", JSON.stringify(preferences));
             }
+
+            function restoreSavedTableData() {
+                updateTableData(djs, songs);
+
+                const preferences = JSON.parse(localStorage.getItem("preferences"));
+                filterByGenre(djs, songs, preferences.genre);
+
+                const selectedDJ = document.getElementById("DJ").value;
+                filterByDJ(selectedDJ);
+            }
         </script>
     </body>
 </html>

@@ -90,6 +90,10 @@ function filterByGenre(djs, songs, genres) {
 const djSelector = document.getElementById("DJ");
 djSelector.addEventListener("change", function () {
     const selectedDJ = djSelector.value;
+    filterByDJ(selectedDJ);
+});
+
+function filterByDJ(selectedDJ) {
     const djRows = document.querySelectorAll(".dj-row");
 
     djRows.forEach((row) => {
@@ -100,7 +104,7 @@ djSelector.addEventListener("change", function () {
             row.style.display = "none";
         }
     });
-});
+}
 
 function updateTableData(djs_data, songs_data) {
     const table = document.getElementById('songs-table');
