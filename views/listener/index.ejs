@@ -66,21 +66,6 @@
                 <!----- DISPLAY SONGS (RIGHT BOX) ----->
                 <div class="listener-song-body">
                     <div class="listener-song-checkbox">
-                        <!-- Table header -->
-                        <ul>
-                            <li>
-                                <label class="form-control">
-                                    <input type="checkbox" name="checkbox" />
-                                    Top 5
-                                </label>
-                            </li>
-                            <li>
-                                <label class="form-control">
-                                    <input type="checkbox" name="checkbox" />
-                                    Top 10
-                                </label> 
-                            </li>
-                        </ul>
                         <h2>Upcoming Songs</h2>
                     </div>
 
@@ -200,12 +185,14 @@
                         }
                     }
 
+                    // redundant conditional (fix)
                     if (preferences.genre.electronic || preferences.genre.lofi || preferences.genre.ambient || preferences.genre.classical) {
                         filterByGenre(djs, songs, preferences.genre);
                     } else {
                         // Restore full table with original data
                         updateTableData(djs, songs);
                     }
+                    filterByDJ(preferences.DJ);
             
                     localStorage.setItem("preferences", JSON.stringify(preferences));
                     console.log("Selected Genre Preferences: ", preferences.genre);
@@ -241,10 +228,11 @@
                 updateTableData(djs, songs);
 
                 const preferences = JSON.parse(localStorage.getItem("preferences"));
-                filterByGenre(djs, songs, preferences.genre);
+                if (preferences.genre.electronic || preferences.genre.lofi || preferences.genre.ambient || preferences.genre.classical) {
+                    filterByGenre(djs, songs, preferences.genre);
+                }
 
-                const selectedDJ = document.getElementById("DJ").value;
-                filterByDJ(selectedDJ);
+                filterByDJ(preferences.DJ);
             }
         </script>
     </body>

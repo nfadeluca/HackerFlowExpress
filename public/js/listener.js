@@ -34,8 +34,8 @@ djSelect.addEventListener("change", function () {
     preferences.DJ = djSelect.value; 
 
     localStorage.setItem("preferences", JSON.stringify(preferences));
-    console.log("Selected DJ: ", preferences.DJ);
-    console.log(preferences);
+    console.log("Selected DJ Preference: ", preferences.DJ);
+    //console.log(preferences);
 });
 
 function getCookie(name) {
