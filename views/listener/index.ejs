@@ -98,6 +98,21 @@
 
                 </div>
             </div>
+
+            <!-- SONG PLAYBAR -->
+
+            <div class="playbar">
+                <div class="current-song-box">
+                    <p id="current-song-title" style="padding:0px; margin:0px;">Select a Song from the Table to Play!</p>
+                    <p id="current-song-artist" style="font-size: 15px; padding:0px; margin:0px;"></p>
+                </div>
+                <button id="playButton">Play</button>
+                <button id="pauseButton">Pause</button>
+                <button id="nextButton">Next</button>
+                <img id="volume-icon" src="/assets/volume-icon.png"/>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                <img id="queue-icon" src="/assets/add-to-queue.png" alt="queue icon" />
+            </div>
         </div>
 
         <!----- SCRIPTS ----->

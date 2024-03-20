@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height:800px;
 }
 
 .listener-sub-body-wrapper {
@@ -98,4 +99,59 @@ th {
     display: flex;
     align-items: center;
     padding: 0;
+}
+
+.dj-row:hover {
+    background-color: gray; /* Change background color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Styling for playbar UI */
+.playbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    padding: 10px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 5px;
+    background: #d3d3d3;
+    outline: none;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#queue-icon,
+#volume-icon {
+    height:60%;
+    margin:5px;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.current-song-box {
+    width:20%;
 }

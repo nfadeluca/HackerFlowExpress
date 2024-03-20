@@ -137,6 +137,20 @@ function updateTableData(djs_data, songs_data) {
             `;
 
             row.classList.add(`dj-row`, `dj-${dj.name}`);
+
+            // Make each song selectable for playing
+            row.addEventListener("click", function(event) {
+                currentSongTitle = document.getElementById("current-song-title")
+                currentSongArtist = document.getElementById("current-song-artist")
+                
+                currentSongTitle.textContent = `${song.title}`
+                currentSongTitle.style.fontWeight = "bold"
+
+                currentSongArtist.textContent = `${song.artist}`
+                currentSongArtist.style.fontStyle = "italic"
+                
+                //console.log(row)
+            })
         });
     });
 
