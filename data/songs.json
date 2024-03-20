@@ -10,7 +10,8 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":1
+        "popularity":1,
+        "filename":"Daft-Punk-Harder-Better-Faster-Stronger.mp3"
     },
     {
         "songID":2,
@@ -23,49 +24,25 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":2
+        "popularity":2,
+        "filename":"Daft-Punk-Technologic.mp3"
     },
     {
         "songID":3,
-        "title":"Little Niece And Her Happiness Mechanism",
-        "album":"Unreleased 2010 - 2011",
-        "artist":"Pearl River Sound",
+        "title":"Fairy Fountain",
+        "album":null,
+        "artist":"GameChops",
         "genre": {
             "electronic":true,
-            "lofi":false,
+            "lofi":true,
             "ambient":false,
             "classical":false
             },
-        "popularity":3
+        "popularity":3,
+        "filename":"Fairy-Fountain.mp3"
     },
     {
         "songID":4,
-        "title":"Hybrid Moments",
-        "album":"Scream With Me",
-        "artist":"David Pajo",
-        "genre": {
-            "electronic":true,
-            "lofi":true,
-            "ambient":false,
-            "classical":false
-            },
-        "popularity":5
-    },
-    {
-        "songID":5,
-        "title":"Fairy Fountain",
-        "album":null,
-        "artist":"Legend of Zelda",
-        "genre": {
-            "electronic":true,
-            "lofi":true,
-            "ambient":false,
-            "classical":false
-            },
-        "popularity":3
-    },
-    {
-        "songID":6,
         "title":"The Carnival of the Animals: XIII, The Swan",
         "album":null,
         "artist":"Saint-Saens",
@@ -75,10 +52,11 @@
             "ambient":false,
             "classical":true
             },
-        "popularity":7
+        "popularity":7,
+        "filename":"The Carnival of the Animals XIII The Swan.mp3"
     },
     {
-        "songID":7,
+        "songID":5,
         "title":"Symphony No. 40: I. Molto allegro",
         "album":null,
         "artist":"Mozart",
@@ -88,175 +66,63 @@
             "ambient":false,
             "classical":true
             },
-        "popularity":8
+        "popularity":8,
+        "filename":"Mozart Symphony 40 in G Minor K 550 1 Molto Allegro.mp3"
     },
     {
-        "songID":8,
-        "title":"pro at ikea",
-        "album":"pro at ikea",
-        "artist":"constantstill",
-        "genre": {
-            "electronic":true,
-            "lofi":true,
-            "ambient":false,
-            "classical":false
-            },
-        "popularity":9
-    },
-    {
-        "songID":9,
-        "title":"Baby Club",
-        "album":"Hugs and Kisses",
-        "artist":"DJ Cuddles",
+        "songID":6,
+        "title":"A Deeper Meaning",
+        "album":"Selections 2023, Vol.1",
+        "artist":"Dragota",
         "genre": {
             "electronic":true,
             "lofi":false,
             "ambient":false,
             "classical":false
             },
-        "popularity":9
+        "popularity":9,
+        "filename":"A-Deeper-Meaning.mp3"
     },
     {
-        "songID":10,
-        "title":"Time after time",
-        "album":"Surround",
-        "artist":"Hiroshi Yoshimura",
+        "songID":7,
+        "title":"Filaments",
+        "album":"Filaments",
+        "artist":"Robert Rich",
         "genre": {
             "electronic":false,
             "lofi":false,
             "ambient":true,
             "classical":false
             },
-        "popularity":10
+        "popularity":10,
+        "filename":"Robert-Rich-Filaments.mp3"
     },
     {
-        "songID": 11,
-        "title": "Moonlit Whispers",
-        "album": "Nightscape",
-        "artist": "Celestial Vibes",
-        "genre": {
-            "electronic": true,
-            "lofi": true,
-            "ambient": false,
-            "classical": false
-        },
-        "popularity": 7
-    },
-    {
-        "songID": 12,
-        "title": "Starry Dreams",
-        "album": "Skyward Tunes",
-        "artist": "Lunar Melodies",
-        "genre": {
-            "electronic": false,
-            "lofi": true,
-            "ambient": true,
-            "classical": false
-        },
-        "popularity": 8
-    },
-    {
-        "songID": 13,
-        "title": "Sunset Serenity",
-        "album": "Golden Hour",
-        "artist": "Horizon Beats",
-        "genre": {
-            "electronic": false,
-            "lofi": false,
-            "ambient": true,
-            "classical": true
-        },
-        "popularity": 9
-    },
-    {
-        "songID": 14,
-        "title": "Dawn's Embrace",
-        "album": "First Light",
-        "artist": "Morning Muse",
-        "genre": {
-            "electronic": true,
-            "lofi": false,
-            "ambient": false,
-            "classical": true
-        },
-        "popularity": 8
-    },
-    {
-        "songID": 15,
-        "title": "Ecliptic Echoes",
-        "album": "Galactic Grooves",
-        "artist": "Starship Rhythms",
-        "genre": {
-            "electronic": true,
-            "lofi": true,
-            "ambient": true,
-            "classical": false
-        },
-        "popularity": 9
-    },
-    {
-        "songID": 16,
-        "title": "Whimsical Waves",
-        "album": "Ocean's Orchestra",
-        "artist": "Marine Melodies",
-        "genre": {
-            "electronic": false,
-            "lofi": true,
-            "ambient": true,
-            "classical": false
-        },
-        "popularity": 7
-    },
-    {
-        "songID": 17,
-        "title": "Forest Frequencies",
-        "album": "Nature Notes",
-        "artist": "Green Grooves",
-        "genre": {
-            "electronic": false,
-            "lofi": false,
-            "ambient": true,
-            "classical": true
-        },
-        "popularity": 8
-    },
-    {
-        "songID": 18,
-        "title": "Mountain Melody",
-        "album": "Peak Performances",
-        "artist": "Alpine Audio",
-        "genre": {
-            "electronic": true,
-            "lofi": false,
-            "ambient": false,
-            "classical": true
-        },
-        "popularity": 9
-    },
-    {
-        "songID": 19,
-        "title": "Desert Drift",
-        "album": "Sands of Sound",
-        "artist": "Dune Dynamics",
-        "genre": {
-            "electronic": true,
-            "lofi": true,
-            "ambient": false,
-            "classical": false
-        },
-        "popularity": 7
-    },
-    {
-        "songID": 20,
-        "title": "Polar Pulse",
+        "songID": 8,
+        "title": "Inhuman",
         "album": "Frigid Frequencies",
         "artist": "Ice Insights",
         "genre": {
             "electronic": true,
-            "lofi": true,
+            "lofi": false,
             "ambient": true,
             "classical": false
         },
-        "popularity": 6
-    }    
+        "popularity": 6,
+        "filename":"aak3-inhuman.mp3"
+    },
+    {
+        "songID": 9,
+        "title": "Uncertain Direction",
+        "album": "Remnants of War",
+        "artist": "Tineidae",
+        "genre": {
+            "electronic": true,
+            "lofi": false,
+            "ambient": true,
+            "classical": false
+        },
+        "popularity": 6,
+        "filename":"tinaeidae-Uncertain-Direction.mp3"
+    }        
 ]

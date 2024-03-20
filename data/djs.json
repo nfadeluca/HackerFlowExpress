@@ -3,8 +3,8 @@
     "djID": 1,
     "name": "One",
     "songs": [
-      4,
-      16
+      1,
+      9
     ],
     "events": [
       {
@@ -20,7 +20,8 @@
     "djID": 2,
     "name": "Two",
     "songs": [
-      16
+      2,
+      8
     ],
     "events": [
       {
@@ -50,15 +51,17 @@
   {
     "djID": 3,
     "name": "Nightwave",
-    "songs": [],
+    "songs": [
+    	9
+    ],
     "events": []
   },
   {
     "djID": 4,
     "name": "Thunder",
     "songs": [
-      19, 
-      20
+      3, 
+      7
     ],
     "events": []
   },
@@ -66,7 +69,8 @@
     "djID": 5,
     "name": "Luna",
     "songs": [
-      20
+      4,
+      6
     ],
     "events": [
       {
@@ -82,12 +86,6 @@
         "songs": []
       }
     ]
-  },
-  {
-    "djID": 6,
-    "name": "Solar Flare",
-    "songs": [],
-    "events": []
   },
   {
     "djID": 7,

@@ -106,7 +106,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            // Declared here instead of listener.js because of EJS directly embedded in HTML
+            // Declare Table Data passed by EJS Template
             var djs = <%- JSON.stringify(djs) %>;
             var songs = <%- JSON.stringify(songs) %>;
 
@@ -124,18 +124,13 @@
                     const songs_data = response2.data;
 
                     // Update the table with the new data
-                    // This part depends on your table structure and how you want to update it
-                    // For example, assuming you have a function updateTableData(data) to update the table content
                     updateTableData(djs_data, songs_data);
                 } catch (error) {
                     console.error('Error reloading data:', error);
                 }
             });
 
-            
-
             const buttons = document.querySelectorAll("[class^='genre-button']");
-            
             // Event Listener: change preference according to button color and index,
             // then update table accordingly
             buttons.forEach(function(button, index) {
@@ -199,8 +194,8 @@
                 });
             });
 
+            // Clear preferences and update table
             function clearSearch() {
-                // Clear Search
                 document.getElementById("search-song"). value = "";
                 const errorMessage = document.getElementById("error-message");
                 errorMessage.textContent = "";
@@ -224,6 +219,7 @@
                 console.log("Cleared preferences: ", JSON.stringify(preferences));
             }
 
+            // Restore/Reload preferences and table data when user returns to the page
             function restoreSavedTableData() {
                 updateTableData(djs, songs);
 

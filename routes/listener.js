@@ -3,6 +3,7 @@ const path = require('path');
 const router = express.Router();
 const axios = require('axios');
 
+// Serve listener page
 router.get('/listener', async (req, res) => {
    try {
       const response1 = await axios.get('http://localhost:3000/api/djs');
@@ -10,6 +11,7 @@ router.get('/listener', async (req, res) => {
       const response2 = await axios.get('http://localhost:3000/api/songs');
       const songs_data = response2.data;
 
+      // Render EJS view
       res.render(path.join(__dirname, '..', 'views', 'listener', 'index.ejs'), {title: 'Listener', djs: djs_data, songs: songs_data});
    } catch (error) {
       console.error('Error fetching Songs data:', error);

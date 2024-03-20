@@ -1,4 +1,4 @@
-// Search song form
+// Handle search song form event
 function validateForm(event) {
     event.preventDefault(); // prevent page refresh
     const inputField = document.getElementById("search-song");
@@ -13,7 +13,7 @@ function validateForm(event) {
     return true; // Allow form submission
 }
 
-// Change username
+// Event Listener: change username
 const element = document.querySelector(".change-name");
 element.addEventListener("click", function() {
     let newUsername;
@@ -27,6 +27,13 @@ element.addEventListener("click", function() {
     document.getElementById("listener-name").innerHTML = "Hello " + newUsername + "!";
 });
 
+// Retrieve user data stored in cookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 // Event Listener: change the DJ preference
 const djSelect = document.getElementById("DJ");
 djSelect.addEventListener("change", function () {
@@ -38,19 +45,13 @@ djSelect.addEventListener("change", function () {
     //console.log(preferences);
 });
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-
 // Display searched songs
 function searchSong(song) {
     console.log("Searching a song '" + song + "'...")
     filterBySearch();
 }
 
+// Show table rows matching the search input
 function filterBySearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("search-song");
@@ -71,7 +72,7 @@ function filterBySearch() {
     }
 }
 
-// Uses local dj/songs data to filter according to preferences stored in local storage
+// Show table rows that match user preferences (stored in local storage)
 function filterByGenre(djs, songs, genres) {
     const table = document.getElementById("songs-table");
     const tr = table.getElementsByTagName("tr");
@@ -93,6 +94,7 @@ djSelector.addEventListener("change", function () {
     filterByDJ(selectedDJ);
 });
 
+// Show table rows that match the selected DJ
 function filterByDJ(selectedDJ) {
     const djRows = document.querySelectorAll(".dj-row");
 
@@ -106,6 +108,7 @@ function filterByDJ(selectedDJ) {
     });
 }
 
+// Recreate the table with give DJ and Song Data
 function updateTableData(djs_data, songs_data) {
     const table = document.getElementById('songs-table');
     table.innerHTML = '';

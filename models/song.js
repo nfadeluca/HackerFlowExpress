@@ -13,7 +13,8 @@ const songSchema = new mongoose.Schema({
   album: String,
   artist: String,
   genre: genreSchema, // embededd document
-  popularity: Number
+  popularity: Number,
+  filename: String
 });
 
 // Compile schema into Song model

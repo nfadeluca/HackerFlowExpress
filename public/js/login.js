@@ -15,11 +15,11 @@ window.onload = function() {
 
             // Reload page state
             reloadListener(username);
-            break;
-        } else {
-            login();
+            return
         }
     }
+    // No cookie with username found
+    login();
 }
 
 /* Login:
@@ -85,6 +85,7 @@ function welcomeListener(username) {
     .innerHTML = text;
 }
 
+// Reload and restore UI components when user returns to the page
 function reloadListener(username) {
     // Reload Username
     let text = "Hello " + username + "!";
@@ -133,5 +134,5 @@ function reloadListener(username) {
     }
 
     // Restore Table
-    restoreSavedTableData(); // I can access functions but not variables???
+    restoreSavedTableData();
 }
