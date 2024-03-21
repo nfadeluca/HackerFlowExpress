@@ -1,6 +1,8 @@
 //Audio
 let audio = null
 let songPlaying = null
+let muted = false
+let volume = 0.5
 
 // Handle search song form event
 function validateForm(event) {
@@ -172,8 +174,15 @@ function updateTableData(djs_data, songs_data) {
 // Volume slider
 var volumeSlider = document.getElementById("volumeSlider");
 volumeSlider.addEventListener("input", function() {
-    if(audio) {
-        audio.volume = volumeSlider.value;
+    v = volumeSlider.value
+    if(v == 0) {
+        mute()
+    } else if(muted) {
+        volume = v
+        unmute()
+    } else if(audio) {
+        audio.volume = v
+        volume = v
     }
 });
 
@@ -200,4 +209,31 @@ function pause() {
     if(audio) {
         audio.pause()
     }
+}
+
+volumeButton = document.getElementById("volume-icon")
+volumeButton.addEventListener("click", function() {
+    if(muted) {
+        unmute()
+    } else {
+        mute()
+    }
+})
+
+function mute() {
+    if (audio && audio.volume > 0) {
+        audio.volume = 0
+    }
+    volumeSlider.value = 0
+    volumeButton.src = "/assets/volume-muted-icon.png"; 
+    muted = true;
+}
+
+function unmute() {
+    if(audio && audio.volume == 0) {
+        audio.volume = volume
+        volumeSlider.value = volume
+    }
+    volumeButton.src = "/assets/volume-icon.png"; 
+    muted = false;
 }
