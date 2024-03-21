@@ -138,5 +138,6 @@ function reloadListener(username) {
     }
 
     // Restore Table
-    restoreSavedTableData();
+    restoreSavedTableData()
+    setCurrentSong()
 }

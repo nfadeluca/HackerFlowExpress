@@ -2,6 +2,9 @@
 let audio = null
 let songPlaying = null
 let muted = false
+let paused = true
+let ended = false
+let repeatCode = 0 // 0: no repeat, 1: repeat all, 2: repeat one
 let volume = 0.5
 
 // Handle search song form event
@@ -145,23 +148,10 @@ function updateTableData(djs_data, songs_data) {
             row.classList.add(`dj-row`, `dj-${dj.name}`);
 
             // Make each song selectable for playing
-            row.addEventListener("click", function(event) {
-                currentSongTitle = document.getElementById("current-song-title")
-                currentSongArtist = document.getElementById("current-song-artist")
-                
-                currentSongTitle.textContent = `${song.title}`
-                currentSongTitle.style.fontWeight = "bold"
-
-                currentSongArtist.textContent = `${song.artist}`
-                currentSongArtist.style.fontStyle = "italic"
-                
-                //console.log(row)
-
-                // Set as current song
+            row.addEventListener("click", function() {
                 localStorage.setItem("currentSong", JSON.stringify(song))
                 console.log("Current song set: ", song)
-
-                // Play
+                setCurrentSong()
                 play()
             })
         });
@@ -186,28 +176,62 @@ volumeSlider.addEventListener("input", function() {
     }
 });
 
+playPauseButton = document.getElementById("playPauseButton")
+playPauseButton.addEventListener("click", function() {
+    if(paused) {
+        play()
+    } else {
+        pause()
+    }
+})
+
 function play() {
     currentSong = localStorage.getItem("currentSong")
     if(currentSong) {
         currentSong = JSON.parse(currentSong)
         //console.log(currentSong)
+
         if(audio && songPlaying === currentSong.title) {
-            audio.play(); // Resume current song
+            // Resume current song
+            audio.play(); 
+            console.log("Resuming song")
         } else if(currentSong.filename) {
+            firstSong = (audio == null)
+
+            // Pause if another song is currently playing
             if(audio) {
-                audio.pause() // Pause if song already playing
+                audio.pause()
             }
-             // Play new song
+
+            // Open new Song to play
             audio = new Audio(`/assets/songFiles/${currentSong.filename}`)
+            
+            // Set songSlider if first song
+            if (firstSong) {
+                setSongSlider()
+            }
+            
+            // Play new song
             audio.play()
             songPlaying = currentSong.title
+            console.log("New song playing: ", currentSong.title)
         }
+
+        // Unpause (only if a song is playing)
+        paused = false
+        playPauseButton.src = "/assets/pause-button.png"
     }
 }
 
 function pause() {
+    // Play only if a song is playing
     if(audio) {
         audio.pause()
+
+        console.log("Song paused: ", currentSong.title)
+
+        paused = true
+        playPauseButton.src = "/assets/play-button.png"
     }
 }
 
@@ -236,4 +260,60 @@ function unmute() {
     }
     volumeButton.src = "/assets/volume-icon.png"; 
     muted = false;
+}
+
+repeatButton = document.getElementById("repeatButton")
+repeatButton.addEventListener("click", function() {
+    console.log(`Changing repeat code from ${repeatCode} to ${repeatCode+1}`)
+    switch (repeatCode) {
+        case 0: // no repeat -> repeat all
+            repeatButton.style.filter="invert(100%)"
+            repeatCode = 1
+            break
+        case 1: // repeat all -> repeat one
+            repeatButton.src = "/assets/repeatone.png"
+            repeatButton.style.filter="invert(100%)"
+            repeatCode = 2
+            audio.addEventListener("ended", repeatOne)
+            break
+        case 2: 
+            repeatButton.src = "/assets/repeat.png"
+            repeatButton.style.filter="invert(30%)"
+            repeatCode = 0
+            audio.removeEventListener("ended", repeatOne)
+            break
+    } 
+})
+
+function repeatOne() {
+    audio.currentTime = 0
+    audio.play()
+}
+
+function setSongSlider() {
+    console.log("Song Slider event listener set")
+    // Update the time slider value as the audio progresses
+    var timeSlider = document.getElementById("timeSlider");
+    audio.addEventListener("timeupdate", function() {
+        timeSlider.value = audio.currentTime
+    });
+
+      // Set the maximum value of the time slider to the duration of the audio
+    audio.addEventListener("loadedmetadata", function() {
+        timeSlider.max = audio.duration
+        timeSlider.value = 0
+    });
+
+    // Handle the ended event to reset the audio playback position
+    audio.addEventListener("ended", function() {
+        audio.currentTime = 0;
+        timeSlider.value = 0;
+        pause()
+        console.log("Song ended ")
+    });
+
+    // Update the audio playback position when the slider is changed
+    timeSlider.addEventListener("input", function() {
+        audio.currentTime = timeSlider.value
+    });
 }

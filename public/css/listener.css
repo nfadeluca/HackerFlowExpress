@@ -154,13 +154,20 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #queue-icon,
-#volume-icon {
+#volume-icon,
+#playPauseButton,
+#nextButton {
     height:30%;
     margin:5px;
-    -webkit-filter: invert(100%);
     filter: invert(100%);
 }
 
+#repeatButton {
+    height:30%;
+    margin:5px;
+    filter: invert(30%);
+}
+
 .current-song-box {
-    width:20%;
+    width:18%;
 }
