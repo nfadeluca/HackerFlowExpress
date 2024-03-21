@@ -65,6 +65,15 @@
     font-size: 15px;
 }
 
+/* header row */
+th {
+    position: sticky;
+    top: 0; /* Stick to the top of the table */
+    background-color: gray; 
+    border: 1px solid white;
+    z-index: 1; /* Ensure the header row stays above other content */
+}
+
 td,
 th {
     border: 1px solid white;
@@ -112,7 +121,7 @@ th {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10%;
+    height: 15%;
     padding: 10px;
     background-color: black;
     display: flex;
@@ -146,7 +155,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 #queue-icon,
 #volume-icon {
-    height:60%;
+    height:30%;
     margin:5px;
     -webkit-filter: invert(100%);
     filter: invert(100%);

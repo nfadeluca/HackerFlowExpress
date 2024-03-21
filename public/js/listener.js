@@ -1,3 +1,7 @@
+//Audio
+let audio = null
+let songPlaying = null
+
 // Handle search song form event
 function validateForm(event) {
     event.preventDefault(); // prevent page refresh
@@ -150,10 +154,50 @@ function updateTableData(djs_data, songs_data) {
                 currentSongArtist.style.fontStyle = "italic"
                 
                 //console.log(row)
+
+                // Set as current song
+                localStorage.setItem("currentSong", JSON.stringify(song))
+                console.log("Current song set: ", song)
+
+                // Play
+                play()
             })
         });
+        
     });
 
     //console.log('Table updated with new data:', djs_data, songs_data);
 }
 
+// Volume slider
+var volumeSlider = document.getElementById("volumeSlider");
+volumeSlider.addEventListener("input", function() {
+    if(audio) {
+        audio.volume = volumeSlider.value;
+    }
+});
+
+function play() {
+    currentSong = localStorage.getItem("currentSong")
+    if(currentSong) {
+        currentSong = JSON.parse(currentSong)
+        //console.log(currentSong)
+        if(audio && songPlaying === currentSong.title) {
+            audio.play(); // Resume current song
+        } else if(currentSong.filename) {
+            if(audio) {
+                audio.pause() // Pause if song already playing
+            }
+             // Play new song
+            audio = new Audio(`/assets/songFiles/${currentSong.filename}`)
+            audio.play()
+            songPlaying = currentSong.title
+        }
+    }
+}
+
+function pause() {
+    if(audio) {
+        audio.pause()
+    }
+}

@@ -66,6 +66,7 @@ function logout() {
 /****** LISTENER CODE ******/
 
 function welcomeListener(username) {
+    // Init Local Storage Preferences
     const userPreferences = {
         "genre": {
             "electronic": false,
@@ -76,9 +77,12 @@ function welcomeListener(username) {
         "DJ": "AllDJ"
     }
     const userPreferencesJSON = JSON.stringify(userPreferences);
-    // Initialize preferences in local storage
     localStorage.setItem("preferences", userPreferencesJSON);
     console.log("Current Preferences: ", localStorage.getItem("preferences"));
+    
+    // Init Local Storage Current Song
+    localStorage.setItem("currentSong", JSON.stringify(null))
+    
     // Display welcome user
     const text = "Hello " + username + "!";
     document.getElementById("listener-name")
