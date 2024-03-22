@@ -59,6 +59,7 @@ function logout() {
     console.log("Logging out");
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=../pages/listerner.html; SameSite=Lax;";   
     localStorage.removeItem("preferences");
+    localStorage.removeItem("currentSong");
     //window.location.href = "../index.html";
 }
 

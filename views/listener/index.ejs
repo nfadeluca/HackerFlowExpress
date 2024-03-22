@@ -83,7 +83,11 @@
                                     if (song) { %>
                                         <tr class="dj-row dj-<%= dj.name %>" onclick="onClickSong(<%= JSON.stringify(song) %>)">
                                             <td>
-                                                <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />
+                                                <img width="25" 
+                                                    height="25" 
+                                                    src="https://img.icons8.com/ultraviolet/40/test-account.png" 
+                                                    alt="test-account" 
+                                                    style="padding-right: 10px;" />
                                                 <%= dj.name %>
                                             </td>
                                             <td>
@@ -101,7 +105,6 @@
             </div>
 
             <!-- SONG PLAYBAR -->
-
             <div class="playbar">                
                 <div class="likes-box">
                     <img id="likeButton" src="/assets/not-liked.png" alt="like button" 
@@ -113,8 +116,12 @@
                     <p id="num-likes" style="display:none; margin:0px; padding:0px;">test</p>
                 </div>
                 <div class="current-song-box">
-                    <p id="current-song-title" style="padding:0px; margin:0px; white-space: nowrap;">Select a Song from the Table to Play!</p>
-                    <p id="current-song-artist" style="font-size: 15px; padding:0px; margin:0px; white-space: nowrap;"></p>
+                    <p id="current-song-title" 
+                        style="padding:0px; margin:0px; white-space: nowrap;">
+                        Select a Song from the Table to Play!
+                    </p>
+                    <p id="current-song-artist" 
+                        style="font-size: 15px; padding:0px; margin:0px; white-space: nowrap;"></p>
                     <input id="timeSlider" type="range" min="0" step="1" value="0" style="width: 100%;" >
                 </div>
                 <img id="playPauseButton" src="/assets/play-button.png"/>
