@@ -225,11 +225,8 @@ function play() {
 
             // Open new Song to play
             audio = new Audio(`/assets/songFiles/${currentSong.filename}`)
-            
-            // Set songSlider if first song
-            if (firstSong) {
-                setSongSlider()
-            }
+
+            setSongSlider() // apparently audio event listeners get destroyed when recreated
             
             // Play new song
             audio.play()
