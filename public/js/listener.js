@@ -6,6 +6,8 @@ let paused = true
 let ended = false
 let repeatCode = 0 // 0: no repeat, 1: repeat all, 2: repeat one
 let volume = 0.5
+let liked = false // dummy
+
 
 // Handle search song form event
 function validateForm(event) {
@@ -82,7 +84,7 @@ function filterBySearch() {
 }
 
 // Show table rows that match user preferences (stored in local storage)
-function filterByGenre(djs, songs, genres) {
+function filterByGenre(songs, genres) {
     const table = document.getElementById("songs-table");
     const tr = table.getElementsByTagName("tr");
 
@@ -92,8 +94,10 @@ function filterByGenre(djs, songs, genres) {
         return Object.keys(genres).some(genre => genres[genre] && song.genre[genre]);
         });
         //console.log("Filtered Songs: ", filteredSongs)
-        updateTableData(djs, filteredSongs);
-    } // else do nothing
+        return filteredSongs
+    } else {
+        console.error("Called filterByGenre with no songs to filter (songs.lentgh <= 0)")
+    }
 }
 
 // Event Listener: Filter by DJ
@@ -120,9 +124,16 @@ function filterByDJ(selectedDJ) {
 // Recreate the table with give DJ and Song Data
 function updateTableData(djs_data, songs_data) {
     const table = document.getElementById('songs-table');
+
+    // Remove event listeners from rows and clear table
+    const rowsWithListeners = document.querySelectorAll('[class^="dj-row"]');
+    rowsWithListeners.forEach(row => {
+        //console.log(row)
+        row.removeEventListener("click", onClickSong);
+    });
     table.innerHTML = '';
 
-    // Add header row with styles
+    // Add new header row with styles
     table.innerHTML = `
         <tr style="background-color: gray;">
             <th style="width: 35%;">DJ</th>
@@ -148,17 +159,26 @@ function updateTableData(djs_data, songs_data) {
             row.classList.add(`dj-row`, `dj-${dj.name}`);
 
             // Make each song selectable for playing
+            
             row.addEventListener("click", function() {
-                localStorage.setItem("currentSong", JSON.stringify(song))
-                console.log("Current song set: ", song)
-                setCurrentSong()
-                play()
+                onClickSong(song)
             })
         });
         
     });
 
-    //console.log('Table updated with new data:', djs_data, songs_data);
+    console.log('Table updated with with data:', djs_data, songs_data);
+}
+
+function onClickSong(song) {
+    if(song) {
+        localStorage.setItem("currentSong", JSON.stringify(song))
+        console.log("Current song set: ", song)
+        setCurrentSong()
+        play()
+        liked = true
+        like()
+    }
 }
 
 // Volume slider
@@ -276,7 +296,7 @@ repeatButton.addEventListener("click", function() {
             repeatCode = 2
             audio.addEventListener("ended", repeatOne)
             break
-        case 2: 
+        case 2:  // repeat one -> no repeat
             repeatButton.src = "/assets/repeat.png"
             repeatButton.style.filter="invert(30%)"
             repeatCode = 0
@@ -288,6 +308,7 @@ repeatButton.addEventListener("click", function() {
 function repeatOne() {
     audio.currentTime = 0
     audio.play()
+    playPauseButton.src = "/assets/pause-button.png" // remove later
 }
 
 function setSongSlider() {
@@ -317,3 +338,35 @@ function setSongSlider() {
         audio.currentTime = timeSlider.value
     });
 }
+
+
+// Event listener for the queue icon
+document.getElementById("queue-icon").addEventListener("click", function() {
+    var queuePopup = document.getElementById("queuePopup");
+    if (queuePopup.style.display === "block") {
+        queuePopup.style.display = "none";
+    } else {
+        queuePopup.style.display = "block";
+    }
+});
+
+likeButton = document.getElementById("likeButton")
+numLikes = document.getElementById("num-likes")
+likeButton.addEventListener("click", like)
+
+function like() {
+    n = parseInt(numLikes.textContent)
+    if (liked) {
+        likeButton.src = "/assets/not-liked.png"
+        numLikes.textContent = `${n-1}`
+        liked = false
+    } else {
+        likeButton.src = "/assets/liked.png"
+        numLikes.textContent = `${n+1}`
+        liked = true
+    }
+}
+
+// function updateLike(numLikes) {
+//     fetch(``)
+// }

@@ -137,7 +137,7 @@ function reloadListener(username) {
         }
     }
 
-    // Restore Table
+    // Restore Table and last played song
     restoreSavedTableData()
     setCurrentSong()
 }

@@ -13,7 +13,7 @@ const songSchema = new mongoose.Schema({
   album: String,
   artist: String,
   genre: genreSchema, // embededd document
-  popularity: Number,
+  likes: Number,
   filename: String
 });
 

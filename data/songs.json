@@ -10,8 +10,9 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":1,
+        "likes":12345,
         "filename":"Daft-Punk-Harder-Better-Faster-Stronger.mp3"
+
     },
     {
         "songID":2,
@@ -24,7 +25,7 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":2,
+        "likes":12543,
         "filename":"Daft-Punk-Technologic.mp3"
     },
     {
@@ -38,7 +39,7 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":3,
+        "likes":1000,
         "filename":"Fairy-Fountain.mp3"
     },
     {
@@ -52,7 +53,7 @@
             "ambient":false,
             "classical":true
             },
-        "popularity":7,
+        "likes":123,
         "filename":"The Carnival of the Animals XIII The Swan.mp3"
     },
     {
@@ -66,7 +67,7 @@
             "ambient":false,
             "classical":true
             },
-        "popularity":8,
+        "likes":321,
         "filename":"Mozart Symphony 40 in G Minor K 550 1 Molto Allegro.mp3"
     },
     {
@@ -80,7 +81,7 @@
             "ambient":false,
             "classical":false
             },
-        "popularity":9,
+        "likes":9,
         "filename":"A-Deeper-Meaning.mp3"
     },
     {
@@ -94,7 +95,7 @@
             "ambient":true,
             "classical":false
             },
-        "popularity":10,
+        "likes":100,
         "filename":"Robert-Rich-Filaments.mp3"
     },
     {
@@ -108,7 +109,7 @@
             "ambient": true,
             "classical": false
         },
-        "popularity": 6,
+        "likes": 52,
         "filename":"aak3-inhuman.mp3"
     },
     {
@@ -122,7 +123,7 @@
             "ambient": true,
             "classical": false
         },
-        "popularity": 6,
+        "likes": 609,
         "filename":"tinaeidae-Uncertain-Direction.mp3"
     }        
 ]

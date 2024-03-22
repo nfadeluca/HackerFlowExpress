@@ -79,8 +79,9 @@
                             <% djs.filter(dj => dj.songs.length > 0).forEach((dj) => { %>
                                 <% dj.songs.forEach((songID) => {
                                     const song = songs.find(s => s.songID === songID);
+                                    // console.log("Song in EJS:", song) // doesn't work
                                     if (song) { %>
-                                        <tr class="dj-row dj-<%= dj.name %>">
+                                        <tr class="dj-row dj-<%= dj.name %>" onclick="onClickSong(<%= JSON.stringify(song) %>)">
                                             <td>
                                                 <img width="25" height="25" src="https://img.icons8.com/ultraviolet/40/test-account.png" alt="test-account" style="padding-right: 10px;" />
                                                 <%= dj.name %>
@@ -101,19 +102,39 @@
 
             <!-- SONG PLAYBAR -->
 
-            <div class="playbar">
+            <div class="playbar">                
+                <div class="likes-box">
+                    <img id="likeButton" src="/assets/not-liked.png" alt="like button" 
+                    style="display:none;
+                        filter: invert(100%);
+                        height:40%;
+                        margin:0px;
+                        padding-bottom:10px;"/>
+                    <p id="num-likes" style="display:none; margin:0px; padding:0px;">test</p>
+                </div>
                 <div class="current-song-box">
-                    <p id="current-song-title" style="padding:0px; margin:0px;">Select a Song from the Table to Play!</p>
-                    <p id="current-song-artist" style="font-size: 15px; padding:0px; margin:0px;"></p>
+                    <p id="current-song-title" style="padding:0px; margin:0px; white-space: nowrap;">Select a Song from the Table to Play!</p>
+                    <p id="current-song-artist" style="font-size: 15px; padding:0px; margin:0px; white-space: nowrap;"></p>
+                    <input id="timeSlider" type="range" min="0" step="1" value="0" style="width: 100%;" >
                 </div>
                 <img id="playPauseButton" src="/assets/play-button.png"/>
                 <img id="nextButton" src="/assets/next-button.png"/>
-                <input id="timeSlider" type="range" min="0" step="1" value="0" style="width: 30%;" >
                 <img id="volume-icon" src="/assets/volume-icon.png"/>
                 <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value=".5" >
                 <img id="queue-icon" src="/assets/add-to-queue.png" alt="queue icon" />
                 <img id="repeatButton" src="/assets/repeat.png" alt="loop"/>
             </div>
+
+            <!-- Popup for Queue -->
+            <div id="queuePopup" class="popup">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <table id="songQueueTable">
+                        <!-- Queue table created at runtime -->
+                    </table>
+                </div>
+            </div>
+
         </div>
 
         <!----- SCRIPTS ----->
@@ -150,65 +171,53 @@
             // Event Listener: change preference according to button color and index,
             // then update table accordingly
             buttons.forEach(function(button, index) {
-                button.addEventListener("click", function() {
-                    const preferences = JSON.parse(localStorage.getItem("preferences"));
-            
-                    // Turn off genre preference, button switches to black
-                    if (button.style.backgroundColor === "grey") {
-                        button.style.backgroundColor = "#1a1a1a";
-            
-                        // Update the genre preference to false
-                        switch (index) {
-                            case 0:
-                                preferences.genre.electronic = false;
-                                break;
-                            case 1:
-                                preferences.genre.lofi = false;
-                                break;
-                            case 2:
-                                preferences.genre.ambient = false;
-                                break;
-                            case 3:
-                                preferences.genre.classical = false;
-                                break;
-                            default:
-                                break;
-                        }
-                    } else { // Turn on genre preference, button switches to grey
-                        button.style.backgroundColor = "grey";
-            
-                        // Update the genre preference to true
-                        switch (index) {
-                            case 0:
-                                preferences.genre.electronic = true;
-                                break;
-                            case 1:
-                                preferences.genre.lofi = true;
-                                break;
-                            case 2:
-                                preferences.genre.ambient = true;
-                                break;
-                            case 3:
-                                preferences.genre.classical = true;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+            button.addEventListener("click", function() {
+                const preferences = JSON.parse(localStorage.getItem("preferences"));
+                
+                let selected = false
 
-                    // redundant conditional (fix)
-                    if (preferences.genre.electronic || preferences.genre.lofi || preferences.genre.ambient || preferences.genre.classical) {
-                        filterByGenre(djs, songs, preferences.genre);
-                    } else {
-                        // Restore full table with original data
-                        updateTableData(djs, songs);
-                    }
-                    filterByDJ(preferences.DJ);
-            
-                    localStorage.setItem("preferences", JSON.stringify(preferences));
-                    console.log("Selected Genre Preferences: ", preferences.genre);
-                });
+                // Toggle the genre preference
+                switch (index) {
+                    case 0:
+                        selected = !preferences.genre.electronic
+                        preferences.genre.electronic = selected
+                        break;
+                    case 1:
+                    selected = !preferences.genre.lofi
+                        preferences.genre.lofi = selected
+                        break;
+                    case 2:
+                        selected = !preferences.genre.ambient
+                        preferences.genre.ambient = selected
+                        break;
+                    case 3:
+                        selected = !preferences.genre.classical
+                        preferences.genre.classical = selected
+                        break;
+                    default:
+                        break;
+                }
+
+                // Update the button color based on the genre preference
+                button.style.backgroundColor = selected ? "grey" : "#1a1a1a";
+                
+                localStorage.setItem("preferences", JSON.stringify(preferences));
+                console.log("Selected Genre Preferences: ", preferences.genre);
+
+                // Update table data based on genre preferences
+                if (preferences.genre.electronic || preferences.genre.lofi || preferences.genre.ambient || preferences.genre.classical) {
+                    filteredSongs = filterByGenre(songs, preferences.genre);
+                    updateTableData(djs, filteredSongs);
+                } else {
+                    // Restore full table with original data
+                    updateTableData(djs, songs);
+                }
+                
+                // Filter table by DJ preference
+                filterByDJ(preferences.DJ);
+                
             });
+        });
 
             // Clear preferences and update table
             function clearSearch() {
@@ -237,30 +246,54 @@
 
             // Restore/Reload preferences and table data when user returns to the page
             function restoreSavedTableData() {
-                updateTableData(djs, songs);
 
                 const preferences = JSON.parse(localStorage.getItem("preferences"));
                 if (preferences.genre.electronic || preferences.genre.lofi || preferences.genre.ambient || preferences.genre.classical) {
-                    filterByGenre(djs, songs, preferences.genre);
+                    filteredSongs = filterByGenre(songs, preferences.genre);
+                    updateTableData(djs, filteredSongs)
                 }
 
                 filterByDJ(preferences.DJ);
             }
 
+            // Update playbar UI based on currentSong in local storage
             function setCurrentSong() {
             song = JSON.parse(localStorage.getItem("currentSong"))
 
-            currentSongTitle = document.getElementById("current-song-title")
-            currentSongArtist = document.getElementById("current-song-artist")
-            
-            currentSongTitle.textContent = `${song.title}`
-            currentSongTitle.style.fontWeight = "bold"
+            if(song) {
+                currentSongTitle = document.getElementById("current-song-title")
+                currentSongArtist = document.getElementById("current-song-artist")
+                likeButton = document.getElementById("likeButton")
+                numLikes = document.getElementById("num-likes")
+                
+                // Display song and artist
+                currentSongTitle.textContent = `${song.title}`
+                currentSongTitle.style.fontWeight = "bold"
+                currentSongArtist.textContent = `${song.artist}`
+                currentSongArtist.style.fontStyle = "italic"
+                
+                console.log(song)
+                // Display likes
+                if (likeButton.style.display == "none") {
+                    console.log("Likes have appeared!")
+                    likeButton.style.display = "inline-block"
+                    numLikes.style.display = "inline-block"
+                } 
+                numLikes.textContent = `${song.likes}`
 
-            currentSongArtist.textContent = `${song.artist}`
-            currentSongArtist.style.fontStyle = "italic"
-
-            // play()
+            }  else {
+                console.error("setCurrentSong error: currentSong null")
+            }
         }
+
+        // function test(song) {
+        //     console.log("Test song: ", song)
+        //     console.log("Type: ", typeof(song))
+        //     const stringified = JSON.stringify(song)
+        //     //const parsed = JSON.parse(song)
+        //     console.log("Test stringified: ", stringified)
+        //     console.log("Type: ", typeof(stringified))
+        // }
         </script>
     </body>
 </html>
