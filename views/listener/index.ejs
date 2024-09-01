@@ -115,7 +115,6 @@
 
             // Listen for the update event from the server
             socket.on('databaseUpdate', async () => {
-                // Reload data from the server when the update event is received
                 try {
                     console.log("Client has detected a change! Attempting to update...");
                     const response1 = await axios.get('http://localhost:3000/api/djs');
@@ -124,8 +123,6 @@
                     const songs_data = response2.data;
 
                     // Update the table with the new data
-                    // This part depends on your table structure and how you want to update it
-                    // For example, assuming you have a function updateTableData(data) to update the table content
                     updateTableData(djs_data, songs_data);
                 } catch (error) {
                     console.error('Error reloading data:', error);
@@ -137,7 +134,7 @@
             const buttons = document.querySelectorAll("[class^='genre-button']");
             
             // Event Listener: change preference according to button color and index,
-            // then update table accordingly
+            // Then update table
             buttons.forEach(function(button, index) {
                 button.addEventListener("click", function() {
                     const preferences = JSON.parse(localStorage.getItem("preferences"));
